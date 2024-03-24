@@ -1,13 +1,16 @@
 package teamseven.ce216project;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Formatter;
 import java.util.Scanner;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 
 public class Library {
     private ArrayList<Book> books;
@@ -43,18 +46,17 @@ public class Library {
         String jsonFormat;
 
         try {
-            scanner = new Scanner(path);
+            scanner = new Scanner(Paths.get(path));
             jsonFormat = scanner.nextLine();        // Gets the .json as string
 
-            books.toArray(new Book[0]);
-            Book[] temp;
-            temp = gson.fromJson(jsonFormat, Book[].class);    // Parses the string into books array
-            books = new ArrayList<>(Arrays.asList(temp));
+            Type foundListType = new TypeToken<ArrayList<Book>>(){}.getType();
+            books = gson.fromJson(jsonFormat, foundListType);                   //  Parses the string into books array
         }
         catch (JsonSyntaxException e) {
             System.err.println("Json has syntax error exception");
-        }
-        finally {
+        } catch (IOException e) {
+            System.err.println("Error occurred while opening .json file");
+        } finally {
             if (scanner  != null) {
                 scanner.close();
             }
