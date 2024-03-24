@@ -41,7 +41,7 @@ public class Library {
         }
     }
 
-    public void importJson(String path){
+    public void importJson(String path) {
         Gson gson = new Gson();
         Scanner scanner = null;
         String jsonFormat;
@@ -50,18 +50,19 @@ public class Library {
             scanner = new Scanner(Paths.get(path));
             jsonFormat = scanner.nextLine();        // Gets the .json as string
 
-            Type foundListType = new TypeToken<ArrayList<Book>>(){}.getType();
+            Type foundListType = new TypeToken<ArrayList<Book>>() {
+            }.getType();
             books = gson.fromJson(jsonFormat, foundListType);                   //  Parses the string into books array
-        }
-        catch (JsonSyntaxException e) {
+        } catch (JsonSyntaxException e) {
             System.err.println("Json has syntax error exception");
         } catch (IOException e) {
             System.err.println("Error occurred while opening .json file");
         } finally {
-            if (scanner  != null) {
+            if (scanner != null) {
                 scanner.close();
             }
         }
+    }
 
     public void addBook(String title, String subtitle, String isbn, String publisher, String date, String edition, String numberOfPages, String cover, String coverPath, String language, String rating, ArrayList<String> authors, ArrayList<String> translators, ArrayList<String> tags) {
         books.add(new Book(title, subtitle, isbn, publisher, date, edition, numberOfPages, cover, coverPath, language, rating, authors, translators, tags));
