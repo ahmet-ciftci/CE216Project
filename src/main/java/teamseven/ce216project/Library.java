@@ -143,4 +143,38 @@ public class Library {
         }
     }
 
+    //Tag Search
+    //and Management
+
+    public void addTag(Book book){
+        isFound=false;
+        for (String s: book.getTags() ){
+            for (String uniqueS : uniqueTags){
+                if(uniqueS.equals(s))isFound=true;
+            }
+            if(!isFound) {
+                uniqueTags.add(s);
+                break;
+            }
+        }
+    }
+
+    public void filterByTags(ArrayList<String> tags){
+        boolean fullyFound = false;
+        isFound = false;
+        for (Book book : books) {
+            for (String tag : tags) {
+                for (String string : book.getTags()) {
+                    if (string.equals(tag)){
+                        isFound=true;
+                    }
+                }
+                fullyFound=isFound;
+            }
+            if (!fullyFound)break;
+            foundBooks.add(book);
+        }
+    }
+
+
 }
