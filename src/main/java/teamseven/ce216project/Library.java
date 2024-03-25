@@ -12,7 +12,7 @@ public class Library {
     private boolean isFound;
 
     //Main Search Method
-    public void search(String string, ArrayList<Book> books){
+    public void search(String string){
 
         if (string == null) {
             foundBooks=books;
