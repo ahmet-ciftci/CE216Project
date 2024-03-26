@@ -52,93 +52,115 @@ public class Library {
 
     // Complementary Search Methods
     public void searchForTitle(String string, Book book){
-        if (book.getTitle().contains(string)&&!isFound){
-            foundBooks.add(book);
-            isFound=true;
-        }
-    }
-
-    public void searchForISBN(String string, Book book){
-        if (book.getIsbn().contains(string)&&!isFound){
-            foundBooks.add(book);
-            isFound=true;
-
-        }
-    }
-
-    public void searchForSubtitle(String string, Book book){
-        if (book.getSubtitle().contains(string)&&!isFound){
-            foundBooks.add(book);
-            isFound=true;
-
-        }
-    }
-
-    public void searchForPublisher(String string, Book book){
-        if (book.getPublisher().contains(string)&&!isFound) {
-            foundBooks.add(book);
-            isFound=true;
-
-        }
-    }
-
-    public void searchForLanguage(String string, Book book){
-        if (book.getLanguage().contains(string)&&!isFound){
-            foundBooks.add(book);
-            isFound=true;
-
-        }
-    }
-
-    public void searchForDate(String string, Book book){
-        if (book.getDate().contains(string)&&!isFound){
-            foundBooks.add(book);
-            isFound=true;
-
-        }
-    }
-
-    public void searchForRating(String string, Book book){
-       float rating = Float.parseFloat(string);
-       float bookRating = Float.parseFloat(book.getRating());
-       if (bookRating==rating&&!isFound){
-           foundBooks.add(book);
-           isFound=true;
-       }
-    }
-
-    public void searchForEdition(String string, Book book){
-        int edition = Integer.parseInt(string);
-        int bookEdition = Integer.parseInt(book.getEdition());
-        if (bookEdition==edition&&!isFound){
-            foundBooks.add(book);
-            isFound=true;
-        }
-    }
-
-    public void searchForNumberOfPages(String string, Book book){
-        int numberOfPages = Integer.parseInt(string);
-        int bookPages = Integer.parseInt(book.getNumberOfPages());
-        if (bookPages==numberOfPages&&!isFound){
-            foundBooks.add(book);
-            isFound=true;
-        }
-    }
-
-    public void searchForAuthor(String string, Book book){
-        for(int i = 0; i<book.getAuthors().size();i++){
-            if(book.getAuthors().get(i).contains(string)&&!isFound){
+        if(book.getTitle()!=null) {
+            if (book.getTitle().contains(string) && !isFound) {
                 foundBooks.add(book);
-                isFound=true;
+                isFound = true;
             }
         }
     }
 
-    public void searchForTranslator(String string, Book book){
-        for(int i = 0; i<book.getTranslators().size();i++){
-            if(book.getTranslators().get(i).contains(string)&&!isFound){
+    public void searchForISBN(String string, Book book){
+        if(book.getIsbn()!=null) {
+            if (book.getIsbn().contains(string) && !isFound) {
                 foundBooks.add(book);
-                isFound=true;
+                isFound = true;
+
+            }
+        }
+    }
+
+    public void searchForSubtitle(String string, Book book){
+        if(book.getSubtitle()!=null) {
+            if (book.getSubtitle().contains(string) && !isFound) {
+                foundBooks.add(book);
+                isFound = true;
+
+            }
+        }
+    }
+
+    public void searchForPublisher(String string, Book book){
+        if(book.getPublisher()!=null) {
+            if (book.getPublisher().contains(string) && !isFound) {
+                foundBooks.add(book);
+                isFound = true;
+
+            }
+        }
+    }
+
+    public void searchForLanguage(String string, Book book){
+        if(book.getLanguage()!=null) {
+            if (book.getLanguage().contains(string) && !isFound) {
+                foundBooks.add(book);
+                isFound = true;
+
+            }
+        }
+    }
+
+    public void searchForDate(String string, Book book){
+        if(book.getDate()!=null) {
+            if (book.getDate().contains(string) && !isFound) {
+                foundBooks.add(book);
+                isFound = true;
+
+            }
+        }
+    }
+
+    public void searchForRating(String string, Book book){
+        if(book.getRating()!=null) {
+            float rating = Float.parseFloat(string);
+            float bookRating = Float.parseFloat(book.getRating());
+            if (bookRating == rating && !isFound) {
+                foundBooks.add(book);
+                isFound = true;
+            }
+        }
+    }
+
+    public void searchForEdition(String string, Book book){
+        if(book.getEdition()!=null) {
+            int edition = Integer.parseInt(string);
+            int bookEdition = Integer.parseInt(book.getEdition());
+            if (bookEdition == edition && !isFound) {
+                foundBooks.add(book);
+                isFound = true;
+            }
+        }
+    }
+
+    public void searchForNumberOfPages(String string, Book book){
+        if(book.getNumberOfPages()!=null) {
+            int numberOfPages = Integer.parseInt(string);
+            int bookPages = Integer.parseInt(book.getNumberOfPages());
+            if (bookPages == numberOfPages && !isFound) {
+                foundBooks.add(book);
+                isFound = true;
+            }
+        }
+    }
+
+    public void searchForAuthor(String string, Book book){
+        if(book.getAuthors()!=null){
+            for(int i = 0; i<book.getAuthors().size();i++) {
+                 if (book.getAuthors().get(i).contains(string) && !isFound) {
+                    foundBooks.add(book);
+                    isFound = true;
+            }
+          }
+        }
+    }
+
+    public void searchForTranslator(String string, Book book){
+        if(book.getTranslators()!=null) {
+            for (int i = 0; i < book.getTranslators().size(); i++) {
+                if (book.getTranslators().get(i).contains(string) && !isFound) {
+                    foundBooks.add(book);
+                    isFound = true;
+                }
             }
         }
     }
