@@ -183,18 +183,16 @@ public class Library {
 
     public void filterByTags(ArrayList<String> tags){
         boolean fullyFound = false;
-        isFound = false;
-        for (Book book : books) {
-            for (String tag : tags) {
-                for (String string : book.getTags()) {
-                    if (string.equals(tag)){
-                        isFound=true;
-                    }
+        for (Book book : books){
+            for (String s :tags){
+                isFound=false;
+                for (String tag : book.getTags()){
+                    if (tag.equals(s))isFound=true;
                 }
-                fullyFound=isFound;
+                if (!isFound)break;
             }
-            if (!fullyFound)break;
-            foundBooks.add(book);
+            if(!isFound)break;
+            else foundBooks.add(book);
         }
     }
 
