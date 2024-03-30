@@ -18,7 +18,9 @@ public class Library {
             foundBooks=books;
             return;
         }else {
-            foundBooks = null;
+            for(Book foundbook : foundBooks){
+                foundbook=null;
+            }
             for (Book b : books) {
                 isFound = false;
                 if (foundBooks != null) {
