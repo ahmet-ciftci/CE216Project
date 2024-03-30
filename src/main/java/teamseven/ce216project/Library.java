@@ -51,7 +51,7 @@ public class Library {
 
 
     // Complementary Search Methods
-    public void searchForTitle(String string, Book book){
+    private void searchForTitle(String string, Book book){
         if(book.getTitle()!=null) {
             if (book.getTitle().contains(string) && !isFound) {
                 foundBooks.add(book);
@@ -60,7 +60,7 @@ public class Library {
         }
     }
 
-    public void searchForISBN(String string, Book book){
+    private void searchForISBN(String string, Book book){
         if(book.getIsbn()!=null) {
             if (book.getIsbn().contains(string) && !isFound) {
                 foundBooks.add(book);
@@ -70,7 +70,7 @@ public class Library {
         }
     }
 
-    public void searchForSubtitle(String string, Book book){
+    private void searchForSubtitle(String string, Book book){
         if(book.getSubtitle()!=null) {
             if (book.getSubtitle().contains(string) && !isFound) {
                 foundBooks.add(book);
@@ -80,7 +80,7 @@ public class Library {
         }
     }
 
-    public void searchForPublisher(String string, Book book){
+    private void searchForPublisher(String string, Book book){
         if(book.getPublisher()!=null) {
             if (book.getPublisher().contains(string) && !isFound) {
                 foundBooks.add(book);
@@ -90,7 +90,7 @@ public class Library {
         }
     }
 
-    public void searchForLanguage(String string, Book book){
+    private void searchForLanguage(String string, Book book){
         if(book.getLanguage()!=null) {
             if (book.getLanguage().contains(string) && !isFound) {
                 foundBooks.add(book);
@@ -100,7 +100,7 @@ public class Library {
         }
     }
 
-    public void searchForDate(String string, Book book){
+    private void searchForDate(String string, Book book){
         if(book.getDate()!=null) {
             if (book.getDate().contains(string) && !isFound) {
                 foundBooks.add(book);
@@ -110,7 +110,7 @@ public class Library {
         }
     }
 
-    public void searchForRating(String string, Book book){
+    private void searchForRating(String string, Book book){
         if(book.getRating()!=null) {
             float rating = Float.parseFloat(string);
             float bookRating = Float.parseFloat(book.getRating());
@@ -121,7 +121,7 @@ public class Library {
         }
     }
 
-    public void searchForEdition(String string, Book book){
+    private void searchForEdition(String string, Book book){
         if(book.getEdition()!=null) {
             int edition = Integer.parseInt(string);
             int bookEdition = Integer.parseInt(book.getEdition());
@@ -132,7 +132,7 @@ public class Library {
         }
     }
 
-    public void searchForNumberOfPages(String string, Book book){
+    private void searchForNumberOfPages(String string, Book book){
         if(book.getNumberOfPages()!=null) {
             int numberOfPages = Integer.parseInt(string);
             int bookPages = Integer.parseInt(book.getNumberOfPages());
@@ -143,7 +143,7 @@ public class Library {
         }
     }
 
-    public void searchForAuthor(String string, Book book){
+    private void searchForAuthor(String string, Book book){
         if(book.getAuthors()!=null){
             for(int i = 0; i<book.getAuthors().size();i++) {
                  if (book.getAuthors().get(i).contains(string) && !isFound) {
@@ -154,7 +154,7 @@ public class Library {
         }
     }
 
-    public void searchForTranslator(String string, Book book){
+    private void searchForTranslator(String string, Book book){
         if(book.getTranslators()!=null) {
             for (int i = 0; i < book.getTranslators().size(); i++) {
                 if (book.getTranslators().get(i).contains(string) && !isFound) {
@@ -168,7 +168,7 @@ public class Library {
     //Tag Search
     //and Management
 
-    public void addTag(Book book){
+    private void addTag(Book book){
         isFound=false;
         for (String s: book.getTags() ){
             for (String uniqueS : uniqueTags){
@@ -176,12 +176,12 @@ public class Library {
             }
             if(!isFound) {
                 uniqueTags.add(s);
-                break;
             }
         }
+        isFound=false;
     }
 
-    public void filterByTags(ArrayList<String> tags){
+    private void filterByTags(ArrayList<String> tags){
         boolean fullyFound = false;
         for (Book book : books){
             for (String s :tags){
@@ -195,6 +195,4 @@ public class Library {
             else foundBooks.add(book);
         }
     }
-
-
 }
