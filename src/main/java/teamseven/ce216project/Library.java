@@ -18,10 +18,9 @@ public class Library {
             foundBooks=books;
             return;
         }else {
-            for(Book foundbook : foundBooks){
-                foundbook=null;
-            }
-            for (Book b : books) {
+            foundBooks.clear();
+
+           for (Book b : books) {
                 isFound = false;
                 if (foundBooks != null) {
                     for (Book j : foundBooks) {
