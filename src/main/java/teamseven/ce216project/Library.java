@@ -22,7 +22,7 @@ public class Library {
 
            for (Book b : books) {
                 isFound = false;
-                if (foundBooks != null) {
+                if (!foundBooks.isEmpty()) {
                     for (Book j : foundBooks) {
                         if (j == b) {
                             isFound = true;
