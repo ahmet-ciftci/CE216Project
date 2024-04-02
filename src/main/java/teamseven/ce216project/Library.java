@@ -181,9 +181,9 @@ public class Library {
     //Tag Search
     //and Management
 
-    private void addTag(Book book){
+    private void addTag(ArrayList<String> tags){
         isFound=false;
-        for (String s: book.getTags() ){
+        for (String s: tags){
             for (String uniqueS : uniqueTags){
                 if(uniqueS.equals(s))isFound=true;
             }
@@ -194,19 +194,20 @@ public class Library {
         isFound=false;
     }
 
-    private void filterByTags(ArrayList<String> tags){
+    private void filterByTags(ArrayList<String> tags) {
         boolean fullyFound = false;
-        for (Book book : books){
-            for (String s :tags){
-                isFound=false;
-                for (String tag : book.getTags()){
-                    if (tag.equals(s))isFound=true;
+        for (Book book : books) {
+            for (String s : tags) {
+                isFound = false;
+                for (String tag : book.getTags()) {
+                    if (tag.equals(s)) isFound = true;
                 }
-                if (!isFound)break;
+                if (!isFound) break;
             }
-            if(!isFound)break;
+            if (!isFound) break;
             else foundBooks.add(book);
         }
+    }
 
 
     public void updateJson(){       // Saves the .json the default file path
