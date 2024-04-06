@@ -22,7 +22,7 @@
             <Button layoutX="112.0" layoutY="40.0" mnemonicParsing="false" text="Delete" />
             <Button layoutX="422.0" layoutY="40.0" mnemonicParsing="false" text="Help" />
             <Button layoutX="286.0" layoutY="40.0" mnemonicParsing="false" text="Import" />
-            <Button layoutX="355.0" layoutY="40.0" mnemonicParsing="false" text="Export" />
+            <Button fx:id="exportButton" layoutX="355.0" layoutY="40.0" mnemonicParsing="false" onAction="#exportJsonPath" text="Export" />
             <ImageView fitHeight="185.0" fitWidth="154.0" layoutX="517.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" />
             <ScrollPane fitToWidth="true" layoutX="468.0" layoutY="210.0" pannable="true" prefHeight="235.0" prefWidth="261.0">
                <content>

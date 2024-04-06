@@ -20,7 +20,14 @@ public class Library {
     private ArrayList<String> uniqueTags;
     private String jsonPath;
 
-  
+
+    public Library() {
+        books = new ArrayList<Book>();
+        foundBooks = new ArrayList<Book>();
+        uniqueTags = new ArrayList<String>();
+        jsonPath = "";
+    }
+
     private boolean isFound;
 
     //Main Search Method
