@@ -67,19 +67,19 @@
             <Button layoutX="412.0" layoutY="93.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="53.0" text="Tags" />
             <TableView fx:id="bookTable" layoutX="8.0" layoutY="134.0" prefHeight="314.0" prefWidth="456.0" tableMenuButtonVisible="true">
               <columns>
-                <TableColumn editable="false" prefWidth="75.0" text="Title" />
-                <TableColumn prefWidth="75.0" text="Author(s)" />
-                  <TableColumn prefWidth="75.0" text="Date" />
-                  <TableColumn prefWidth="75.0" text="Tag(s)" />
-                  <TableColumn prefWidth="75.0" text="Rating" />
-                  <TableColumn prefWidth="75.0" text="Subtitle" />
-                  <TableColumn prefWidth="75.0" text="ISBN" />
-                  <TableColumn prefWidth="75.0" text="Publisher" />
-                  <TableColumn prefWidth="75.0" text="Edition" />
-                  <TableColumn prefWidth="75.0" text="Number of Pages" />
-                  <TableColumn prefWidth="75.0" text="Cover" />
-                  <TableColumn prefWidth="75.0" text="Language" />
-                  <TableColumn prefWidth="75.0" text="Translator(s)" />
+                <TableColumn fx:id="titleCol" editable="false" prefWidth="75.0" text="Title" />
+                <TableColumn fx:id="authorsCol" prefWidth="75.0" text="Author(s)" />
+                  <TableColumn fx:id="dateCol" prefWidth="75.0" text="Date" />
+                  <TableColumn fx:id="tagsCol" prefWidth="75.0" text="Tag(s)" />
+                  <TableColumn fx:id="ratingCol" prefWidth="75.0" text="Rating" />
+                  <TableColumn fx:id="subtitleCol" prefWidth="75.0" text="Subtitle" />
+                  <TableColumn fx:id="ISBNCol" prefWidth="75.0" text="ISBN" />
+                  <TableColumn fx:id="publisherCol" prefWidth="75.0" text="Publisher" />
+                  <TableColumn fx:id="editionCol" prefWidth="75.0" text="Edition" />
+                  <TableColumn fx:id="pagesCol" prefWidth="75.0" text="Number of Pages" />
+                  <TableColumn fx:id="coverCol" prefWidth="75.0" text="Cover" />
+                  <TableColumn fx:id="languageCol" prefWidth="75.0" text="Language" />
+                  <TableColumn fx:id="translatorsCol" prefWidth="75.0" text="Translator(s)" />
               </columns>
             </TableView>
          </children>

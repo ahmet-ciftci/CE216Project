@@ -24,6 +24,8 @@ public class App extends Application {
 
         MainController controller = loader.getController();
         Library library = new Library();
+
+        library.search(null);
         controller.initialize(library);
 
         Scene scene = new Scene(root);

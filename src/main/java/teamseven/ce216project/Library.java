@@ -15,8 +15,8 @@ import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 public class Library {
-    private ArrayList<Book> books;
-    private ArrayList<Book> foundBooks;
+    private ArrayList<Book> books = new ArrayList<>();
+    private ArrayList<Book> foundBooks = new ArrayList<>();
     private ArrayList<String> uniqueTags;
     private String jsonPath;
 
@@ -275,7 +275,9 @@ public class Library {
         }
 
         updateJson();
+    }
 
-
+    public ArrayList<Book> getFoundBooks() {
+        return foundBooks;
     }
 }
