@@ -13,8 +13,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<DialogPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="teamseven.ce216project.AddEditController">
+<DialogPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="527.0" prefWidth="600.0">
          <children>
@@ -61,6 +60,7 @@
                         </AnchorPane>
                         <AnchorPane prefWidth="579.0" GridPane.rowIndex="3">
                            <children>
+                              <TextField layoutX="178.0" prefHeight="26.0" prefWidth="383.0" promptText="Enter Text" />
                               <Label layoutY="4.0" text="Author(s):" />
                               <Button layoutX="62.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="46.0" text="Add" />
                               <Button layoutX="116.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="54.0" text="Delete" />
@@ -77,6 +77,7 @@
                         </AnchorPane>
                         <AnchorPane GridPane.rowIndex="5">
                            <children>
+                              <TextField layoutX="162.0" prefHeight="26.0" prefWidth="399.0" promptText="Enter Text" />
                               <Label layoutY="4.0" text="Tag(s):" />
                               <Button layoutX="47.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="46.0" text="Add" />
                               <Button layoutX="101.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="54.0" text="Delete" />
@@ -127,6 +128,7 @@
                         </AnchorPane>
                         <AnchorPane layoutX="10.0" layoutY="256.0" GridPane.rowIndex="13">
                            <children>
+                              <TextField layoutX="198.0" prefHeight="26.0" prefWidth="363.0" promptText="Enter Text" />
                               <Label layoutY="4.0" text="Translator(s):" />
                               <Button layoutX="82.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="46.0" text="Add" />
                               <Button layoutX="136.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="54.0" text="Delete" />
