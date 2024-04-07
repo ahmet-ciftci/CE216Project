@@ -86,6 +86,18 @@ public class MainController{
 
             Optional<ButtonType> buttonType = dialog.showAndWait();
             if(buttonType.get() == ButtonType.APPLY){
+                if(controller.getTitleField() == null &&
+                        controller.getSubtitleField() == null &&
+                        controller.getISBNField() == null &&
+                        controller.getPublisherField() == null &&
+                        controller.getDateField() == null &&
+                        controller.getEditionField() == null &&
+                        controller.getNumberOfPagesField() == null &&
+                        controller.getCoverField() == null &&
+                        controller.getLanguageField() == null &&
+                        controller.getRatingField() == null){
+                    return;
+                }
                 library.addBook(controller.getTitleField(),controller.getSubtitleField(),controller.getISBNField(),controller.getPublisherField(),controller.getDateField(),controller.getEditionField(),controller.getNumberOfPagesField(),controller.getCoverField(), null,controller.getLanguageField(),controller.getRatingField(),null,null,null);
                 // SELF-NOTE: DONT FORGET TO ADD PATH AND LIST
             }
