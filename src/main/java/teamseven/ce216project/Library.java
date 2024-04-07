@@ -257,8 +257,8 @@ public class Library {
 
     public void addBook(String title, String subtitle, String isbn, String publisher, String date, String edition, String numberOfPages, String cover, String coverPath, String language, String rating, ArrayList<String> authors, ArrayList<String> translators, ArrayList<String> tags) {
         books.add(new Book(title, subtitle, isbn, publisher, date, edition, numberOfPages, cover, coverPath, language, rating, authors, translators, tags));
-        addTag(tags);
-        updateJson();
+        //addTag(tags);
+        //updateJson();
     }
 
     public void deleteBook(Book bookToDelete) {

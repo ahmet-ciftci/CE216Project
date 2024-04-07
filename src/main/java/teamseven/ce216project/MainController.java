@@ -28,6 +28,8 @@ public class MainController{
     @FXML
     private TableColumn<Book, ArrayList<String>> authorsCol;
     @FXML
+    private TableColumn<Book, String> dateCol;
+    @FXML
     private TableColumn<Book, ArrayList<String>> tagsCol;
     @FXML
     private TableColumn<Book, String> ratingCol;
@@ -56,6 +58,7 @@ public class MainController{
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
         authorsCol.setCellValueFactory(new PropertyValueFactory<>("authors"));
         tagsCol.setCellValueFactory(new PropertyValueFactory<>("tags"));
+        dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
         ratingCol.setCellValueFactory(new PropertyValueFactory<>("rating"));
         subtitleCol.setCellValueFactory(new PropertyValueFactory<>("subtitle"));
         ISBNCol.setCellValueFactory(new PropertyValueFactory<>("isbn"));
@@ -76,8 +79,9 @@ public class MainController{
             AddEditController controller = fxmlLoader.getController();
 
             Dialog<ButtonType> dialog = new Dialog<>();
-            dialog.setDialogPane(bookDialogPane);
             dialog.setTitle("Add a book");
+            dialog.setDialogPane(bookDialogPane);
+
 
 
             Optional<ButtonType> buttonType = dialog.showAndWait();
@@ -97,10 +101,11 @@ public class MainController{
     }
 
     public void handleDeleteButton(ActionEvent event) {
-
-
-
+        int index = bookTable.getSelectionModel().getSelectedIndex();
+        library.getFoundBooks().remove(index);
+        refreshTableView();
     }
+
     public void refreshTableView(){
         books = FXCollections.observableArrayList(library.getFoundBooks());
         bookTable.setItems(books);
