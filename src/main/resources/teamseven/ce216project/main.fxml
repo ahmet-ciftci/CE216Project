@@ -17,9 +17,9 @@
    <children>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="733.0">
          <children>
-            <Button layoutX="8.0" layoutY="40.0" mnemonicParsing="false" text="Add" />
-            <Button layoutX="60.0" layoutY="40.0" mnemonicParsing="false" text="Edit" />
-            <Button layoutX="112.0" layoutY="40.0" mnemonicParsing="false" text="Delete" />
+            <Button fx:id="addButton" layoutX="8.0" layoutY="40.0" mnemonicParsing="false" text="Add" />
+            <Button fx:id="editButton" layoutX="60.0" layoutY="40.0" mnemonicParsing="false" text="Edit" />
+            <Button fx:id="deleteButton" layoutX="112.0" layoutY="40.0" mnemonicParsing="false" text="Delete" />
             <Button layoutX="422.0" layoutY="40.0" mnemonicParsing="false" text="Help" />
             <Button layoutX="286.0" layoutY="40.0" mnemonicParsing="false" text="Import" />
             <Button layoutX="355.0" layoutY="40.0" mnemonicParsing="false" text="Export" />
@@ -65,7 +65,7 @@
             </ScrollPane>
             <TextField layoutX="8.0" layoutY="93.0" prefHeight="28.0" prefWidth="457.0" promptText="Search" />
             <Button layoutX="412.0" layoutY="93.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="53.0" text="Tags" />
-            <TableView layoutX="8.0" layoutY="134.0" prefHeight="314.0" prefWidth="456.0" tableMenuButtonVisible="true">
+            <TableView fx:id="bookTable" layoutX="8.0" layoutY="134.0" prefHeight="314.0" prefWidth="456.0" tableMenuButtonVisible="true">
               <columns>
                 <TableColumn editable="false" prefWidth="75.0" text="Title" />
                 <TableColumn prefWidth="75.0" text="Author(s)" />
