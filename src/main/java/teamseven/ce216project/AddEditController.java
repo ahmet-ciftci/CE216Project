@@ -1,5 +1,6 @@
 package teamseven.ce216project;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -54,29 +55,98 @@ public class AddEditController {
 
     private String coverPath;
 
-    private void handleAuthorAdd(){
+    @FXML
+    private void handleAuthorAdd(ActionEvent event){
 
     }
-    private void handleAuthorDelete(){
+    @FXML
+    private void handleAuthorDelete(ActionEvent event){
 
     }
-    private void handleTagAdd(){
+    @FXML
+    private void handleTagAdd(ActionEvent event){
 
     }
-    private void handleTagDelete(){
+    @FXML
+    private void handleTagDelete(ActionEvent event){
 
     }
-    private void handleTranslatorAdd(){
+    @FXML
+    private void handleTranslatorAdd(ActionEvent event){
 
     }
-    private void handleTranslatorDelete(){
+    @FXML
+    private void handleTranslatorDelete(ActionEvent event){
+
+    }
+    @FXML
+    private void handleLoadCoverPath(ActionEvent event){
+
+    }
+    @FXML
+    private void handleDeleteCoverPath(ActionEvent event){
 
     }
 
-    private void handleLoadCoverPath(){
-
+    public String getTitleField() {
+        String text = titleField.getText();
+        if (text.isBlank()) return null;
+        return text;
     }
-    private void handleDeleteCoverPath(){
 
+    public String getDateField() {
+        String text = dateField.getText();
+        if (text.isBlank()) return null;
+        return text;
     }
+
+    public String getRatingField() {
+        String text = ratingField.getText();
+        if (text.isBlank()) return null;
+        return text;
+    }
+
+    public String getSubtitleField() {
+        String text = subtitleField.getText();
+        if (text.isBlank()) return null;
+        return text;
+    }
+
+    public String getISBNField() {
+        String text = ISBNField.getText();
+        if (text.isBlank()) return null;
+        return text;
+    }
+
+    public String getPublisherField() {
+        String text = publisherField.getText();
+        if (text.isBlank()) return null;
+        return text;
+    }
+
+    public String getEditionField() {
+        String text = editionField.getText();
+        if (text.isBlank()) return null;
+        return text;
+    }
+
+    public String getNumberOfPagesField() {
+        String text = numberOfPagesField.getText();
+        if (text.isBlank()) return null;
+        return text;
+    }
+
+    public String getCoverField() {
+        String text = coverField.getText();
+        if (text.isBlank()) return null;
+        return text;
+    }
+
+    public String getLanguageField() {
+        String text = languageField.getText();
+        if (text.isBlank()) return null;
+        return text;
+    }
+
+    // Lists will be done here
 }
