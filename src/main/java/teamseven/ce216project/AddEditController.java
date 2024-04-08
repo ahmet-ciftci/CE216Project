@@ -36,6 +36,13 @@ public class AddEditController {
     private ListView<String> translatorList;
 
     @FXML
+    private TextField authorField;
+    @FXML
+    private TextField tagField;
+    @FXML
+    private TextField translatorField;
+
+    @FXML
     private Button authorAddButton;
     @FXML
     private Button authorDeleteButton;
@@ -57,27 +64,54 @@ public class AddEditController {
 
     @FXML
     private void handleAuthorAdd(ActionEvent event){
-
+        String text = authorField.getText();
+        if(!text.isBlank()) {
+            authorList.getItems().add(text);
+        }
+        authorField.clear();
     }
     @FXML
     private void handleAuthorDelete(ActionEvent event){
-
+        try {
+            int index = authorList.getSelectionModel().getSelectedIndex();
+            authorList.getItems().remove(index);
+        }catch (Exception e){
+            System.err.println("No item is selected");
+        }
     }
     @FXML
     private void handleTagAdd(ActionEvent event){
-
+        String text = tagField.getText();
+        if(!text.isBlank()) {
+            tagList.getItems().add(text);
+        }
+        tagField.clear();
     }
     @FXML
     private void handleTagDelete(ActionEvent event){
-
+        try {
+            int index = tagList.getSelectionModel().getSelectedIndex();
+            tagList.getItems().remove(index);
+        }catch (Exception e){
+            System.err.println("No item is selected");
+        }
     }
     @FXML
     private void handleTranslatorAdd(ActionEvent event){
-
+        String text = translatorField.getText();
+        if(!text.isBlank()) {
+            translatorList.getItems().add(text);
+        }
+        translatorField.clear();
     }
     @FXML
     private void handleTranslatorDelete(ActionEvent event){
-
+        try {
+            int index = translatorList.getSelectionModel().getSelectedIndex();
+            translatorList.getItems().remove(index);
+        }catch (Exception e){
+            System.err.println("No item is selected");
+        }
     }
     @FXML
     private void handleLoadCoverPath(ActionEvent event){
