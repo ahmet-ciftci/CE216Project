@@ -5,7 +5,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class AddEditController {
@@ -62,7 +67,12 @@ public class AddEditController {
     @FXML
     private Button deleteImageButton;
 
+    @FXML
+    private ImageView imageView;
+
+
     private String coverPath;
+
 
     @FXML
     private void handleAuthorAdd(ActionEvent event){
@@ -117,11 +127,24 @@ public class AddEditController {
     }
     @FXML
     private void handleLoadCoverPath(ActionEvent event){
+        FileChooser fc = new FileChooser();
+        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg");
+        fc.getExtensionFilters().add(filter);
+        fc.setTitle("Select an cover image");
+        Stage stage = new Stage();
+        File file = fc.showOpenDialog(stage);
+
+        if(file != null) {
+            String imagePath = file.toURI().toString();
+            imageView.setImage(new Image(imagePath));
+            coverPath = imagePath;
+        }
 
     }
     @FXML
     private void handleDeleteCoverPath(ActionEvent event){
-
+        coverPath = null;
+        imageView.setImage(null);
     }
 
     public String getTitleField() {
@@ -200,5 +223,9 @@ public class AddEditController {
         ArrayList<String> list = new ArrayList<>(translatorList.getItems());
         if(list.isEmpty()) return null;
         return list;
+    }
+
+    public String getCoverPath() {
+        return coverPath;
     }
 }

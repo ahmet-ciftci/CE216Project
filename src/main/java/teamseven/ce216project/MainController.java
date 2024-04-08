@@ -98,11 +98,12 @@ public class MainController{
                         controller.getRatingField() == null &&
                         controller.getAuthorList() == null &&
                         controller.getTagList() == null &&
-                        controller.getTranslatorList() == null ){
+                        controller.getTranslatorList() == null &&
+                        controller.getCoverPath() == null){
                     return;
                 }
-                library.addBook(controller.getTitleField(),controller.getSubtitleField(),controller.getISBNField(),controller.getPublisherField(),controller.getDateField(),controller.getEditionField(),controller.getNumberOfPagesField(),controller.getCoverField(), null,controller.getLanguageField(),controller.getRatingField(),controller.getAuthorList(),controller.getTranslatorList(),controller.getTagList());
-                // SELF-NOTE: DONT FORGET TO ADD PATH AND LIST
+                library.addBook(controller.getTitleField(),controller.getSubtitleField(),controller.getISBNField(),controller.getPublisherField(),controller.getDateField(),controller.getEditionField(),controller.getNumberOfPagesField(),controller.getCoverField(), controller.getCoverPath(),controller.getLanguageField(),controller.getRatingField(),controller.getAuthorList(),controller.getTranslatorList(),controller.getTagList());
+
             }
         } catch (IOException e) {
             System.err.println(e);
