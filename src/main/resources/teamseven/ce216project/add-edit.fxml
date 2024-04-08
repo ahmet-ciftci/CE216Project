@@ -42,19 +42,19 @@
                      <children>
                         <AnchorPane>
                            <children>
-                              <TextField layoutY="19.0" prefHeight="26.0" prefWidth="561.0" promptText="Enter Text" />
+                              <TextField fx:id="titleField" layoutY="19.0" prefHeight="26.0" prefWidth="561.0" promptText="Enter Text" />
                               <Label layoutX="1.0" text="Title:" />
                            </children>
                         </AnchorPane>
                         <AnchorPane GridPane.rowIndex="1">
                            <children>
-                              <TextField layoutY="19.0" prefHeight="26.0" prefWidth="561.0" promptText="Enter Text" />
+                              <TextField fx:id="dateField" layoutY="19.0" prefHeight="26.0" prefWidth="561.0" promptText="Enter Text" />
                               <Label layoutX="1.0" text="Date:" />
                            </children>
                         </AnchorPane>
                         <AnchorPane GridPane.rowIndex="2">
                            <children>
-                              <TextField layoutY="19.0" prefHeight="26.0" prefWidth="561.0" promptText="Enter Text" />
+                              <TextField fx:id="ratingField" layoutY="19.0" prefHeight="26.0" prefWidth="561.0" promptText="Enter Text" />
                               <Label layoutX="1.0" text="Rating:" />
                            </children>
                         </AnchorPane>
@@ -62,15 +62,15 @@
                            <children>
                               <TextField layoutX="178.0" prefHeight="26.0" prefWidth="383.0" promptText="Enter Text" />
                               <Label layoutY="4.0" text="Author(s):" />
-                              <Button layoutX="62.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="46.0" text="Add" />
-                              <Button layoutX="116.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="54.0" text="Delete" />
-                              <ListView layoutY="28.0" prefHeight="119.0" prefWidth="561.0" />
+                              <Button fx:id="authorAddButton" layoutX="62.0" mnemonicParsing="false" onAction="#handleAuthorAdd" prefHeight="26.0" prefWidth="46.0" text="Add" />
+                              <Button fx:id="authorDeleteButton" layoutX="116.0" mnemonicParsing="false" onAction="#handleAuthorDelete" prefHeight="26.0" prefWidth="54.0" text="Delete" />
+                              <ListView fx:id="authorList" layoutY="28.0" prefHeight="119.0" prefWidth="561.0" />
                            </children>
                         </AnchorPane>
                         <AnchorPane GridPane.rowIndex="4">
                            <children>
-                              <Button layoutX="182.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="90.0" text="Delete Image" />
-                              <Button layoutX="88.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="81.0" text="Load Image" />
+                              <Button fx:id="deleteImageButton" layoutX="182.0" mnemonicParsing="false" onAction="#handleDeleteCoverPath" prefHeight="26.0" prefWidth="90.0" text="Delete Image" />
+                              <Button fx:id="loadImageButton" layoutX="88.0" mnemonicParsing="false" onAction="#handleLoadCoverPath" prefHeight="0.0" prefWidth="81.0" text="Load Image" />
                               <Label layoutY="3.0" text="Cover Image:" />
                               <ImageView fitHeight="119.0" fitWidth="94.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" />
                            </children>
@@ -79,50 +79,50 @@
                            <children>
                               <TextField layoutX="162.0" prefHeight="26.0" prefWidth="399.0" promptText="Enter Text" />
                               <Label layoutY="4.0" text="Tag(s):" />
-                              <Button layoutX="47.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="46.0" text="Add" />
-                              <Button layoutX="101.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="54.0" text="Delete" />
-                              <ListView layoutY="28.0" prefHeight="119.0" prefWidth="561.0" />
+                              <Button fx:id="tagAddButton" layoutX="47.0" mnemonicParsing="false" onAction="#handleTagAdd" prefHeight="26.0" prefWidth="46.0" text="Add" />
+                              <Button fx:id="tagDeleteButton" layoutX="101.0" mnemonicParsing="false" onAction="#handleTagDelete" prefHeight="26.0" prefWidth="54.0" text="Delete" />
+                              <ListView fx:id="tagList" layoutY="28.0" prefHeight="119.0" prefWidth="561.0" />
                            </children>
                         </AnchorPane>
                         <AnchorPane layoutX="10.0" layoutY="50.0" GridPane.rowIndex="6">
                            <children>
-                              <TextField layoutY="19.0" prefHeight="26.0" prefWidth="561.0" promptText="Enter Text" />
+                              <TextField fx:id="subtitleField" layoutY="19.0" prefHeight="26.0" prefWidth="561.0" promptText="Enter Text" />
                               <Label layoutX="1.0" text="Subtitle:" />
                            </children>
                         </AnchorPane>
                         <AnchorPane layoutX="10.0" GridPane.rowIndex="7">
                            <children>
-                              <TextField layoutY="19.0" prefHeight="26.0" prefWidth="561.0" promptText="Enter Text" />
+                              <TextField fx:id="ISBNField" layoutY="19.0" prefHeight="26.0" prefWidth="561.0" promptText="Enter Text" />
                               <Label layoutX="1.0" text="ISBN:" />
                            </children>
                         </AnchorPane>
                         <AnchorPane layoutX="10.0" GridPane.rowIndex="8">
                            <children>
-                              <TextField layoutY="19.0" prefHeight="26.0" prefWidth="561.0" promptText="Enter Text" />
+                              <TextField fx:id="publisherField" layoutY="19.0" prefHeight="26.0" prefWidth="561.0" promptText="Enter Text" />
                               <Label layoutX="1.0" text="Publisher:" />
                            </children>
                         </AnchorPane>
                         <AnchorPane layoutX="10.0" GridPane.rowIndex="9">
                            <children>
-                              <TextField layoutY="19.0" prefHeight="26.0" prefWidth="561.0" promptText="Enter Text" />
+                              <TextField fx:id="editionField" layoutY="19.0" prefHeight="26.0" prefWidth="561.0" promptText="Enter Text" />
                               <Label layoutX="1.0" text="Edition:" />
                            </children>
                         </AnchorPane>
                         <AnchorPane layoutX="10.0" GridPane.rowIndex="10">
                            <children>
-                              <TextField layoutY="19.0" prefHeight="26.0" prefWidth="561.0" promptText="Enter Text" />
+                              <TextField fx:id="numberOfPagesField" layoutY="19.0" prefHeight="26.0" prefWidth="561.0" promptText="Enter Text" />
                               <Label layoutX="1.0" text="Number of Pages:" />
                            </children>
                         </AnchorPane>
                         <AnchorPane layoutX="10.0" GridPane.rowIndex="11">
                            <children>
-                              <TextField layoutY="19.0" prefHeight="26.0" prefWidth="561.0" promptText="Enter Text" />
+                              <TextField fx:id="coverField" layoutY="19.0" prefHeight="26.0" prefWidth="561.0" promptText="Enter Text" />
                               <Label layoutX="1.0" text="Cover:" />
                            </children>
                         </AnchorPane>
                         <AnchorPane layoutX="10.0" GridPane.rowIndex="12">
                            <children>
-                              <TextField layoutY="19.0" prefHeight="26.0" prefWidth="561.0" promptText="Enter Text" />
+                              <TextField fx:id="languageField" layoutY="19.0" prefHeight="26.0" prefWidth="561.0" promptText="Enter Text" />
                               <Label layoutX="1.0" text="Language:" />
                            </children>
                         </AnchorPane>
@@ -130,9 +130,9 @@
                            <children>
                               <TextField layoutX="198.0" prefHeight="26.0" prefWidth="363.0" promptText="Enter Text" />
                               <Label layoutY="4.0" text="Translator(s):" />
-                              <Button layoutX="82.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="46.0" text="Add" />
-                              <Button layoutX="136.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="54.0" text="Delete" />
-                              <ListView layoutY="28.0" prefHeight="119.0" prefWidth="561.0" />
+                              <Button fx:id="translatorAddButton" layoutX="82.0" mnemonicParsing="false" onAction="#handleTranslatorAdd" prefHeight="26.0" prefWidth="46.0" text="Add" />
+                              <Button fx:id="translatorDeleteButton" layoutX="136.0" mnemonicParsing="false" onAction="#handleTranslatorDelete" prefHeight="26.0" prefWidth="54.0" text="Delete" />
+                              <ListView fx:id="translatorList" layoutY="28.0" prefHeight="119.0" prefWidth="561.0" />
                            </children>
                         </AnchorPane>
                      </children>
