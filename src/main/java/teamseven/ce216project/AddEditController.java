@@ -1,5 +1,6 @@
 package teamseven.ce216project;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -70,8 +71,9 @@ public class AddEditController {
     @FXML
     private ImageView imageView;
 
-
     private String coverPath;
+
+    private Book bookToEdit;
 
 
     @FXML
@@ -149,61 +151,81 @@ public class AddEditController {
 
     public String getTitleField() {
         String text = titleField.getText();
-        if (text.isBlank()) return null;
+        if(text != null) {
+            if (text.isBlank()) return null;
+        }
         return text;
     }
 
     public String getDateField() {
         String text = dateField.getText();
-        if (text.isBlank()) return null;
+        if(text != null) {
+            if (text.isBlank()) return null;
+        }
         return text;
     }
 
     public String getRatingField() {
         String text = ratingField.getText();
-        if (text.isBlank()) return null;
+        if(text != null) {
+            if (text.isBlank()) return null;
+        }
         return text;
     }
 
     public String getSubtitleField() {
         String text = subtitleField.getText();
-        if (text.isBlank()) return null;
+        if(text != null) {
+            if (text.isBlank()) return null;
+        }
         return text;
     }
 
     public String getISBNField() {
         String text = ISBNField.getText();
-        if (text.isBlank()) return null;
+        if(text != null) {
+            if (text.isBlank()) return null;
+        }
         return text;
     }
 
     public String getPublisherField() {
         String text = publisherField.getText();
-        if (text.isBlank()) return null;
+        if(text != null) {
+            if (text.isBlank()) return null;
+        }
         return text;
     }
 
     public String getEditionField() {
         String text = editionField.getText();
-        if (text.isBlank()) return null;
+        if(text != null) {
+            if (text.isBlank()) return null;
+        }
         return text;
     }
 
     public String getNumberOfPagesField() {
         String text = numberOfPagesField.getText();
-        if (text.isBlank()) return null;
+        if(text != null) {
+            if (text.isBlank()) return null;
+        }
         return text;
     }
 
     public String getCoverField() {
         String text = coverField.getText();
-        if (text.isBlank()) return null;
+        if(text != null) {
+            if (text.isBlank()) return null;
+        }
         return text;
     }
 
     public String getLanguageField() {
         String text = languageField.getText();
-        if (text.isBlank()) return null;
+        if(text != null) {
+            if (text.isBlank()) return null;
+        }
         return text;
     }
 
@@ -227,5 +249,34 @@ public class AddEditController {
 
     public String getCoverPath() {
         return coverPath;
+    }
+
+    public void setBookToEdit(Book bookToEdit) {
+        this.bookToEdit = bookToEdit;
+
+        titleField.setText(bookToEdit.getTitle());
+        dateField.setText(bookToEdit.getDate());
+        ratingField.setText(bookToEdit.getRating());
+        if(bookToEdit.getAuthors() != null){
+            authorList.setItems(FXCollections.observableList(bookToEdit.getAuthors()));
+        }
+        coverPath = bookToEdit.getCoverPath();
+        if(coverPath != null) {
+            imageView.setImage(new Image(coverPath));
+        }
+        if(bookToEdit.getTags() != null){
+            tagList.setItems(FXCollections.observableList(bookToEdit.getTags()));
+        }
+        subtitleField.setText(bookToEdit.getSubtitle());
+        ISBNField.setText(bookToEdit.getIsbn());
+        publisherField.setText(bookToEdit.getPublisher());
+        editionField.setText(bookToEdit.getEdition());
+        numberOfPagesField.setText(bookToEdit.getNumberOfPages());
+        coverField.setText(bookToEdit.getCover());
+        languageField.setText(bookToEdit.getLanguage());
+        if(bookToEdit.getTranslators() != null) {
+            translatorList.setItems(FXCollections.observableList(bookToEdit.getTranslators()));
+        }
+
     }
 }

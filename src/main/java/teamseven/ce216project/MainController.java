@@ -72,7 +72,7 @@ public class MainController{
 
     }
 
-    public void handleAddButton(ActionEvent event) {
+    public void handleAddButton() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("add-edit.fxml"));
             DialogPane bookDialogPane = fxmlLoader.load();
@@ -81,8 +81,6 @@ public class MainController{
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setTitle("Add a book");
             dialog.setDialogPane(bookDialogPane);
-
-
 
             Optional<ButtonType> buttonType = dialog.showAndWait();
             if(buttonType.get() == ButtonType.APPLY){
@@ -112,11 +110,48 @@ public class MainController{
 
     }
 
-    public void handleEditButton(ActionEvent event) {
+    public void handleEditButton() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("add-edit.fxml"));
+            DialogPane bookDialogPane = fxmlLoader.load();
+            AddEditController controller = fxmlLoader.getController();
 
+            int index = bookTable.getSelectionModel().getSelectedIndex();
+            controller.setBookToEdit(library.getFoundBooks().get(index));
+
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setTitle("Edit a book");
+            dialog.setDialogPane(bookDialogPane);
+
+            Optional<ButtonType> buttonType = dialog.showAndWait();
+            if(buttonType.get() == ButtonType.APPLY) {
+                if (controller.getTitleField() == null &&
+                        controller.getSubtitleField() == null &&
+                        controller.getISBNField() == null &&
+                        controller.getPublisherField() == null &&
+                        controller.getDateField() == null &&
+                        controller.getEditionField() == null &&
+                        controller.getNumberOfPagesField() == null &&
+                        controller.getCoverField() == null &&
+                        controller.getLanguageField() == null &&
+                        controller.getRatingField() == null &&
+                        controller.getAuthorList() == null &&
+                        controller.getTagList() == null &&
+                        controller.getTranslatorList() == null &&
+                        controller.getCoverPath() == null) {
+                    return;
+                }
+                Book book = new Book(controller.getTitleField(),controller.getSubtitleField(),controller.getISBNField(),controller.getPublisherField(),controller.getDateField(),controller.getEditionField(),controller.getNumberOfPagesField(),controller.getCoverField(), controller.getCoverPath(),controller.getLanguageField(),controller.getRatingField(),controller.getAuthorList(),controller.getTranslatorList(),controller.getTagList());
+                library.getFoundBooks().set(index, book);
+                refreshTableView();
+            }
+
+        } catch (IOException e) {
+            System.err.println(e);
+        }
     }
 
-    public void handleDeleteButton(ActionEvent event) {
+    public void handleDeleteButton() {
         int index = bookTable.getSelectionModel().getSelectedIndex();
         library.getFoundBooks().remove(index);
         refreshTableView();
