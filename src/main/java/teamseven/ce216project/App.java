@@ -22,10 +22,10 @@ public class App extends Application {
             root = loader.load();
         } catch (IOException e) {throw new RuntimeException(e);}
 
-        MainController controller = loader.getController();
+        MainController mainController = loader.getController();
         Library library = new Library();
         library.addBook("title","asd","1239512","ahmet","23.521.620","3","2532","yok","","turkish","10",null,null,null);
-        controller.initialize(library);
+        mainController.initialize(library);
 
         Scene scene = new Scene(root);
         stage.setScene(scene);

@@ -30,6 +30,10 @@ public class Library {
 
     private boolean isFound;
 
+    public ArrayList<Book> getFoundBooks() {
+        return foundBooks;
+    }
+
     //Main Search Method
     public void search(String string){
 
@@ -264,8 +268,9 @@ public class Library {
 
     public void addBook(String title, String subtitle, String isbn, String publisher, String date, String edition, String numberOfPages, String cover, String coverPath, String language, String rating, ArrayList<String> authors, ArrayList<String> translators, ArrayList<String> tags) {
         books.add(new Book(title, subtitle, isbn, publisher, date, edition, numberOfPages, cover, coverPath, language, rating, authors, translators, tags));
-        addTag(tags);
+        //addTag(tags);
         updateJson();
+        search(null);
     }
 
     public void deleteBook(Book bookToDelete) {

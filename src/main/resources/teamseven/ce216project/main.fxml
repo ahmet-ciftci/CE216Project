@@ -21,9 +21,9 @@
             <Button layoutX="60.0" layoutY="40.0" mnemonicParsing="false" text="Edit" />
             <Button layoutX="112.0" layoutY="40.0" mnemonicParsing="false" text="Delete" />
             <Button layoutX="422.0" layoutY="40.0" mnemonicParsing="false" text="Help" />
-            <Button layoutX="286.0" layoutY="40.0" mnemonicParsing="false" text="Import" />
+            <Button fx:id="importButton" layoutX="286.0" layoutY="40.0" mnemonicParsing="false" onAction="#importJsonPath" text="Import" />
             <Button fx:id="exportButton" layoutX="355.0" layoutY="40.0" mnemonicParsing="false" onAction="#exportJsonPath" text="Export" />
-            <ImageView fitHeight="185.0" fitWidth="154.0" layoutX="517.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="coverImage" fitHeight="185.0" fitWidth="154.0" layoutX="517.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" />
             <ScrollPane fitToWidth="true" layoutX="468.0" layoutY="210.0" pannable="true" prefHeight="235.0" prefWidth="261.0">
                <content>
                   <GridPane prefHeight="464.0" prefWidth="249.0">
@@ -46,40 +46,40 @@
                         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Label text="Title:" />
-                        <Label text="Author(s):" GridPane.rowIndex="1" />
-                        <Label text="Date:" GridPane.rowIndex="2" />
-                        <Label text="Tag(s):" GridPane.rowIndex="3" />
-                        <Label text="Rating:" GridPane.rowIndex="4" />
-                        <Label text="Subtitle:" GridPane.rowIndex="5" />
-                        <Label layoutX="10.0" layoutY="73.0" text="ISBN:" GridPane.rowIndex="6" />
-                        <Label layoutX="10.0" layoutY="8.0" text="Publisher:" GridPane.rowIndex="7" />
-                        <Label layoutX="10.0" layoutY="353.0" text="Edition:" GridPane.rowIndex="8" />
-                        <Label layoutX="10.0" layoutY="21.0" text="Number of Pages:" GridPane.rowIndex="9" />
-                        <Label layoutX="10.0" layoutY="21.0" text="Cover:" GridPane.rowIndex="10" />
-                        <Label layoutX="10.0" layoutY="21.0" text="Language:" GridPane.rowIndex="11" />
-                        <Label layoutX="10.0" layoutY="21.0" text="Translator(s):" GridPane.rowIndex="12" />
+                        <Label fx:id="titleLabel" text="Title:" />
+                        <Label fx:id="authorsLabel" text="Author(s):" GridPane.rowIndex="1" />
+                        <Label fx:id="dateLabel" text="Date:" GridPane.rowIndex="2" />
+                        <Label fx:id="tagsLabel" text="Tag(s):" GridPane.rowIndex="3" />
+                        <Label fx:id="ratingLabel" text="Rating:" GridPane.rowIndex="4" />
+                        <Label fx:id="subtitleLabel" text="Subtitle:" GridPane.rowIndex="5" />
+                        <Label fx:id="isbnLabel" layoutX="10.0" layoutY="73.0" text="ISBN:" GridPane.rowIndex="6" />
+                        <Label fx:id="publisherLabel" layoutX="10.0" layoutY="8.0" text="Publisher:" GridPane.rowIndex="7" />
+                        <Label fx:id="editionLabel" layoutX="10.0" layoutY="353.0" text="Edition:" GridPane.rowIndex="8" />
+                        <Label fx:id="numberOfPagesLabel" layoutX="10.0" layoutY="21.0" text="Number of Pages:" GridPane.rowIndex="9" />
+                        <Label fx:id="coverLabel" layoutX="10.0" layoutY="21.0" text="Cover:" GridPane.rowIndex="10" />
+                        <Label fx:id="languageLabel" layoutX="10.0" layoutY="21.0" text="Language:" GridPane.rowIndex="11" />
+                        <Label fx:id="translatorsLabel" layoutX="10.0" layoutY="21.0" text="Translator(s):" GridPane.rowIndex="12" />
                      </children>
                   </GridPane>
                </content>
             </ScrollPane>
             <TextField layoutX="8.0" layoutY="93.0" prefHeight="28.0" prefWidth="457.0" promptText="Search" />
             <Button layoutX="412.0" layoutY="93.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="53.0" text="Tags" />
-            <TableView layoutX="8.0" layoutY="134.0" prefHeight="314.0" prefWidth="456.0" tableMenuButtonVisible="true">
+            <TableView fx:id="bookTable" layoutX="8.0" layoutY="134.0" onMouseClicked="#showDetailedView" prefHeight="314.0" prefWidth="456.0" tableMenuButtonVisible="true">
               <columns>
-                <TableColumn editable="false" prefWidth="75.0" text="Title" />
-                <TableColumn prefWidth="75.0" text="Author(s)" />
-                  <TableColumn prefWidth="75.0" text="Date" />
-                  <TableColumn prefWidth="75.0" text="Tag(s)" />
-                  <TableColumn prefWidth="75.0" text="Rating" />
-                  <TableColumn prefWidth="75.0" text="Subtitle" />
-                  <TableColumn prefWidth="75.0" text="ISBN" />
-                  <TableColumn prefWidth="75.0" text="Publisher" />
-                  <TableColumn prefWidth="75.0" text="Edition" />
-                  <TableColumn prefWidth="75.0" text="Number of Pages" />
-                  <TableColumn prefWidth="75.0" text="Cover" />
-                  <TableColumn prefWidth="75.0" text="Language" />
-                  <TableColumn prefWidth="75.0" text="Translator(s)" />
+                <TableColumn fx:id="titleCol" editable="false" prefWidth="75.0" text="Title" />
+                <TableColumn fx:id="authorsCol" prefWidth="75.0" text="Author(s)" />
+                  <TableColumn fx:id="dateCol" prefWidth="75.0" text="Date" />
+                  <TableColumn fx:id="tagsCol" prefWidth="75.0" text="Tag(s)" />
+                  <TableColumn fx:id="ratingCol" prefWidth="75.0" text="Rating" />
+                  <TableColumn fx:id="subtitleCol" prefWidth="75.0" text="Subtitle" />
+                  <TableColumn fx:id="ISBNCol" prefWidth="75.0" text="ISBN" />
+                  <TableColumn fx:id="publisherCol" prefWidth="75.0" text="Publisher" />
+                  <TableColumn fx:id="editionCol" prefWidth="75.0" text="Edition" />
+                  <TableColumn fx:id="pagesCol" prefWidth="75.0" text="Number of Pages" />
+                  <TableColumn fx:id="coverCol" prefWidth="75.0" text="Cover" />
+                  <TableColumn fx:id="languageCol" prefWidth="75.0" text="Language" />
+                  <TableColumn fx:id="translatorsCol" prefWidth="75.0" text="Translator(s)" />
               </columns>
             </TableView>
          </children>
