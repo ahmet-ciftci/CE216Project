@@ -95,10 +95,13 @@ public class MainController{
                         controller.getNumberOfPagesField() == null &&
                         controller.getCoverField() == null &&
                         controller.getLanguageField() == null &&
-                        controller.getRatingField() == null){
+                        controller.getRatingField() == null &&
+                        controller.getAuthorList() == null &&
+                        controller.getTagList() == null &&
+                        controller.getTranslatorList() == null ){
                     return;
                 }
-                library.addBook(controller.getTitleField(),controller.getSubtitleField(),controller.getISBNField(),controller.getPublisherField(),controller.getDateField(),controller.getEditionField(),controller.getNumberOfPagesField(),controller.getCoverField(), null,controller.getLanguageField(),controller.getRatingField(),null,null,null);
+                library.addBook(controller.getTitleField(),controller.getSubtitleField(),controller.getISBNField(),controller.getPublisherField(),controller.getDateField(),controller.getEditionField(),controller.getNumberOfPagesField(),controller.getCoverField(), null,controller.getLanguageField(),controller.getRatingField(),controller.getAuthorList(),controller.getTranslatorList(),controller.getTagList());
                 // SELF-NOTE: DONT FORGET TO ADD PATH AND LIST
             }
         } catch (IOException e) {

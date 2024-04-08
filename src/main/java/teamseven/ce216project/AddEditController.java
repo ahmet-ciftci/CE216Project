@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
+import java.util.ArrayList;
+
 public class AddEditController {
     @FXML
     private TextField titleField;
@@ -182,5 +184,21 @@ public class AddEditController {
         return text;
     }
 
-    // Lists will be done here
+    public ArrayList<String> getAuthorList() {
+        ArrayList<String> list = new ArrayList<>(authorList.getItems());
+        if(list.isEmpty()) return null;
+        return list;
+    }
+
+    public ArrayList<String> getTagList() {
+        ArrayList<String> list = new ArrayList<>(tagList.getItems());
+        if(list.isEmpty()) return null;
+        return list;
+    }
+
+    public ArrayList<String> getTranslatorList() {
+        ArrayList<String> list = new ArrayList<>(translatorList.getItems());
+        if(list.isEmpty()) return null;
+        return list;
+    }
 }
