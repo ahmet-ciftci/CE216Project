@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -58,6 +60,9 @@ public class MainController{
     private TableColumn<Book, String> languageCol;
     @FXML
     private TableColumn<Book, ArrayList<String>> translatorsCol;
+
+    @FXML
+    private TextField searchBar;
 
     private ObservableList<Book> books;
 
@@ -137,7 +142,7 @@ public class MainController{
                     return;
                 }
                 library.addBook(controller.getTitleField(),controller.getSubtitleField(),controller.getISBNField(),controller.getPublisherField(),controller.getDateField(),controller.getEditionField(),controller.getNumberOfPagesField(),controller.getCoverField(), null,controller.getLanguageField(),controller.getRatingField(),null,null,null);
-                // SELF-NOTE: DONT FORGET TO ADD PATH AND LIST
+                // SELF-NOTE: DON'T FORGET TO ADD PATH AND LIST
             }
         } catch (IOException e) {
             System.err.println(e);
@@ -199,5 +204,11 @@ public class MainController{
         languageLabel.setText("Language: " + library.getFoundBooks().get(index).getLanguage());
         translatorsLabel.setText("Translators: " + library.getFoundBooks().get(index).getTranslators());
         coverImage.setImage(new Image(library.getFoundBooks().get(index).getCoverPath()));
+    }
+
+
+    private ArrayList<Book> searchList(String searchedWord){
+        library.search(searchedWord);
+        return library.getFoundBooks();
     }
 }
