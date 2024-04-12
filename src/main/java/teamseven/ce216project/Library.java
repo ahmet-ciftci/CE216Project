@@ -7,6 +7,7 @@ import java.lang.reflect.Type;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Formatter;
+import java.util.Objects;
 import java.util.Scanner;
 
 import com.google.gson.Gson;
@@ -311,5 +312,18 @@ public class Library {
 
     public String getJsonPath() {
         return jsonPath;
+    }
+
+    public ArrayList<Book> getBooks() {
+        return books;
+    }
+
+    public int getSameBookIndex(Book book){
+        for (int i = 0; i < books.size(); i++) {
+            if(Objects.equals(books.get(i), book)){
+                return i;
+            }
+        }
+        return -1;
     }
 }

@@ -181,7 +181,12 @@ public class MainController{
                     return;
                 }
                 Book book = new Book(controller.getTitleField(),controller.getSubtitleField(),controller.getISBNField(),controller.getPublisherField(),controller.getDateField(),controller.getEditionField(),controller.getNumberOfPagesField(),controller.getCoverField(), controller.getCoverPath(),controller.getLanguageField(),controller.getRatingField(),controller.getAuthorList(),controller.getTranslatorList(),controller.getTagList());
+                Book oldBook = library.getFoundBooks().get(index);
                 library.getFoundBooks().set(index, book);
+                if (library.getSameBookIndex(oldBook) != -1){
+                    library.getBooks().set(library.getSameBookIndex(oldBook), book);
+
+                }
                 refreshTableView();
             }
 
@@ -193,8 +198,8 @@ public class MainController{
     public void handleDeleteButton() {
         int index = bookTable.getSelectionModel().getSelectedIndex();
         Book bookToDelete = bookTable.getSelectionModel().getSelectedItem();
+        library.getFoundBooks().remove(index);
         library.deleteBook(bookToDelete);
-        //library.getFoundBooks().remove(index);
         refreshTableView();
     }
 
