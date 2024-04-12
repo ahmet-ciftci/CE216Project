@@ -92,6 +92,7 @@ public class MainController{
 
     public void initialize(Library library) {
         this.library = library;
+        library.importJson(library.getJsonPath());
         refreshTableView();
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
         authorsCol.setCellValueFactory(new PropertyValueFactory<>("authors"));
@@ -193,7 +194,7 @@ public class MainController{
         int index = bookTable.getSelectionModel().getSelectedIndex();
         Book bookToDelete = bookTable.getSelectionModel().getSelectedItem();
         library.deleteBook(bookToDelete);
-        library.getFoundBooks().remove(index);
+        //library.getFoundBooks().remove(index);
         refreshTableView();
     }
 

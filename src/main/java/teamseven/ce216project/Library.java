@@ -25,7 +25,7 @@ public class Library {
         books = new ArrayList<Book>();
         foundBooks = new ArrayList<Book>();
         uniqueTags = new ArrayList<String>();
-        jsonPath = "";
+        jsonPath = "C:\\Users\\ozgur\\Desktop\\CE216Project\\src\\main\\resources\\teamseven\\ce216project\\default.json";
     }
 
     private boolean isFound;
@@ -278,16 +278,24 @@ public class Library {
 
         // Check if deleted book's tags appear in any existing book
         ArrayList<String> tagsToCheck = bookToDelete.getTags();
-        tagChecker:
-        for (String tag : tagsToCheck) {
-            for (Book book : books) {
-                if (book.getTags().contains(tag)) {continue tagChecker;} // Proceed to check other tags if a tag is found in any existing book
+        if(tagsToCheck != null) {
+            tagChecker:
+            for (String tag : tagsToCheck) {
+                for (Book book : books) {
+                    if (book.getTags().contains(tag)) {
+                        continue tagChecker;
+                    } // Proceed to check other tags if a tag is found in any existing book
+                }
+                uniqueTags.remove(tag); //Remove a tag if it has not been found in any existing book.
             }
-            uniqueTags.remove(tag); //Remove a tag if it has not been found in any existing book.
-        }
 
+
+        }
         updateJson();
 
+    }
 
+    public String getJsonPath() {
+        return jsonPath;
     }
 }

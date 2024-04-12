@@ -24,8 +24,9 @@ public class App extends Application {
 
         MainController mainController = loader.getController();
         Library library = new Library();
-        library.addBook("title","asd","1239512","ahmet","23.521.620","3","2532","yok","","turkish","10",null,null,null);
+        library.search(null);
         mainController.initialize(library);
+        mainController.refreshTableView();
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
