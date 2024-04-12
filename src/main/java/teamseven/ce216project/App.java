@@ -24,11 +24,13 @@ public class App extends Application {
 
         MainController mainController = loader.getController();
         Library library = new Library();
-        library.search(null);
+
         mainController.initialize(library);
+        library.search(null);
         mainController.refreshTableView();
 
         Scene scene = new Scene(root);
+        stage.setTitle("Book Library");
         stage.setScene(scene);
         stage.show();
     }

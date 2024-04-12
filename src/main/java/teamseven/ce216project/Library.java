@@ -1,8 +1,7 @@
 package teamseven.ce216project;
 
 
-import java.io.IOException;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.file.Paths;
@@ -25,7 +24,14 @@ public class Library {
         books = new ArrayList<Book>();
         foundBooks = new ArrayList<Book>();
         uniqueTags = new ArrayList<String>();
-        jsonPath = "C:\\Users\\ozgur\\Desktop\\CE216Project\\src\\main\\resources\\teamseven\\ce216project\\default.json";
+        String documentsPath = System.getProperty("user.home") + File.separator + "Documents" + File.separator + "TempLibrary";
+        File f = new File(documentsPath);
+        jsonPath = f.getAbsolutePath() + File.separator + "default.json";
+        if(!f.exists()){
+            f = new File(System.getProperty("user.home") + File.separator + "Documents", "TempLibrary");
+            f.mkdir();
+            updateJson();
+        }
     }
 
     private boolean isFound;
