@@ -24,7 +24,15 @@ public class Library {
         books = new ArrayList<Book>();
         foundBooks = new ArrayList<Book>();
         uniqueTags = new ArrayList<String>();
-        String documentsPath = System.getProperty("user.home") + File.separator + "Documents" + File.separator + "TempLibrary";
+        String documentsPath;
+        File checkingFile = new File(System.getProperty("user.home") + File.separator + "Belgeler");
+        if(checkingFile.exists()) {
+            documentsPath = System.getProperty("user.home") + File.separator + "Belgeler" + File.separator + "TempLibrary";
+        }
+        else {
+            documentsPath = System.getProperty("user.home") + File.separator + "Documents" + File.separator + "TempLibrary";
+        }
+
         File f = new File(documentsPath);
         jsonPath = f.getAbsolutePath() + File.separator + "default.json";
         if(!f.exists()){
