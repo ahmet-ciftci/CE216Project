@@ -203,7 +203,6 @@ public class Library {
         ArrayList<Boolean> checkList =new ArrayList<>();
         if(book.getTags()!=null&&tags!=null){
             for(String tag : tags){
-                System.out.println(tag);
                 checkList.add(book.getTags().contains(tag));
             }
             for (int i = 0;i<checkList.size();i++){
