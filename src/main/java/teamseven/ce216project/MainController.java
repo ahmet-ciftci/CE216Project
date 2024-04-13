@@ -270,7 +270,6 @@ public class MainController{
             if (library.getFoundBooks() != null) library.getFoundBooks().clear();
             for (Book book : library.getBooks()) {
                 book.setFound(false);
-                System.out.println(book.getTitle());
             }
             ArrayList<String> tags = new ArrayList<>();
             String input = searchBar.getText();

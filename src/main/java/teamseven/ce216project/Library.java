@@ -199,26 +199,22 @@ public class Library {
     }
 
     public void filterByTags(ArrayList<String> tags, Book book) {
-        isFound=false;
+        isFound =true;
+        ArrayList<Boolean> checkList =new ArrayList<>();
         if(book.getTags()!=null&&tags!=null){
-            for (String tag: tags){
-                if(!book.getFound()) {
-                    for (String bookTag : book.getTags()) {
-                        if (tag.equals(bookTag)) {
-                            isFound = true;
-                            break;
-                        }
-                    }
-                    if (!isFound) {
-                        break;
-                    }
-                    book.setFound(true);
-                    foundBooks.add(book);
+            for(String tag : tags){
+                System.out.println(tag);
+                checkList.add(book.getTags().contains(tag));
+            }
+            for (int i = 0;i<checkList.size();i++){
+                if (!checkList.get(i)){
+                    isFound=false;
+                    break;
                 }
             }
+            if (isFound) foundBooks.add(book);
         }
     }
-
 
 
 
