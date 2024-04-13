@@ -3,10 +3,13 @@ package teamseven.ce216project;
 
 import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.io.*;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Formatter;
+import java.util.Objects;
 import java.util.Scanner;
 
 import com.google.gson.Gson;
@@ -24,7 +27,22 @@ public class Library {
         books = new ArrayList<Book>();
         foundBooks = new ArrayList<Book>();
         uniqueTags = new ArrayList<String>();
-        jsonPath = "";
+        String documentsPath;
+        File checkingFile = new File(System.getProperty("user.home") + File.separator + "Belgeler");
+        if(checkingFile.exists()) {
+            documentsPath = System.getProperty("user.home") + File.separator + "Belgeler" + File.separator + "TempLibrary";
+        }
+        else {
+            documentsPath = System.getProperty("user.home") + File.separator + "Documents" + File.separator + "TempLibrary";
+        }
+
+        File f = new File(documentsPath);
+        jsonPath = f.getAbsolutePath() + File.separator + "default.json";
+        if(!f.exists()){
+            f = new File(System.getProperty("user.home") + File.separator + "Documents", "TempLibrary");
+            f.mkdir();
+            updateJson();
+        }
     }
 
 
@@ -262,21 +280,37 @@ public class Library {
 
         // Check if deleted book's tags appear in any existing book
         ArrayList<String> tagsToCheck = bookToDelete.getTags();
-        tagChecker:
-        for (String tag : tagsToCheck) {
-            for (Book book : books) {
-                if (book.getTags().contains(tag)) {
-                    continue tagChecker;
-                } // Proceed to check other tags if a tag is found in any existing book
+        if(tagsToCheck != null) {
+            tagChecker:
+            for (String tag : tagsToCheck) {
+                for (Book book : books) {
+                    if (book.getTags().contains(tag)) {
+                        continue tagChecker;
+                    } // Proceed to check other tags if a tag is found in any existing book
+                }
+                uniqueTags.remove(tag); //Remove a tag if it has not been found in any existing book.
             }
-            uniqueTags.remove(tag); //Remove a tag if it has not been found in any existing book.
+
+
         }
-
         updateJson();
-
 
     }
 
-    public ArrayList<Book> getBooks() {return books;}
+    public String getJsonPath() {
+        return jsonPath;
+    }
 
+    public ArrayList<Book> getBooks() {
+        return books;
+    }
+
+    public int getSameBookIndex(Book book){
+        for (int i = 0; i < books.size(); i++) {
+            if(Objects.equals(books.get(i), book)){
+                return i;
+            }
+        }
+        return -1;
+    }
 }
