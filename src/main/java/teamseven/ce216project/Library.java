@@ -164,7 +164,10 @@ public class Library {
         isFound = false;
         for (String s : book.getTags()) {
             for (String uniqueS : uniqueTags) {
-                if (uniqueS.equals(s)) isFound = true;
+                if (uniqueS.equals(s)) {
+                    isFound = true;
+                    break;
+                }
             }
             if (!isFound) {
                 uniqueTags.add(s);
@@ -180,7 +183,8 @@ public class Library {
                 if(!book.getFound()) {
                     for (String bookTag : book.getTags()) {
                         if (tag.equals(bookTag)) {
-                            isFound =true;
+                            isFound = true;
+                            break;
                         }
                     }
                     if (!isFound) {
