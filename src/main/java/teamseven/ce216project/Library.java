@@ -56,7 +56,7 @@ public class Library {
 
     //Main Search Method
     public void search(String string) {
-        if (string == null) {
+        if (string == null || string.isBlank()) {
             foundBooks = books;
         } else {
             foundBooks = new ArrayList<>();
