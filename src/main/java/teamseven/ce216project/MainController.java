@@ -211,16 +211,18 @@ public class MainController{
         for (Book book : books){
             book.setFound(false);
         }
-        String book = searchBar.getText();
-        library.search(book);
+        String txt = searchBar.getText();
+        library.search(txt);
         refreshTableView();
 
     }
 
     public void searchTags(ActionEvent event) {
+        library.setFoundBooks(library.getBooks());
         if(library.getFoundBooks()!=null)library.getFoundBooks().clear();
         for (Book book : books) {
             book.setFound(false);
+            System.out.println(book.getTitle());
         }
         ArrayList<String> tags = new ArrayList<>();
         String input = searchBar.getText();

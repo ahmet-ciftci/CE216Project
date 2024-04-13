@@ -32,6 +32,10 @@ public class Library {
         return foundBooks;
     }
 
+    public void setFoundBooks(ArrayList<Book> foundBooks) {
+        this.foundBooks = foundBooks;
+    }
+
     //Main Search Method
     public void search(String string) {
         if (string == null) {
@@ -272,5 +276,7 @@ public class Library {
 
 
     }
+
+    public ArrayList<Book> getBooks() {return books;}
 
 }
