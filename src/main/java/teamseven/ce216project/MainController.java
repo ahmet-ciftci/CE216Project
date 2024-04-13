@@ -31,6 +31,8 @@ public class MainController{
     @FXML
     private Button deleteButton;
     @FXML
+    private Button saveChangesButton;
+    @FXML
     private TableView<Book> bookTable;
     @FXML
     private TableColumn<Book, String> titleCol;
@@ -246,5 +248,10 @@ public class MainController{
         languageLabel.setText("Language: " + library.getFoundBooks().get(index).getLanguage());
         translatorsLabel.setText("Translators: " + library.getFoundBooks().get(index).getTranslators());
         coverImage.setImage(new Image(library.getFoundBooks().get(index).getCoverPath()));
+    }
+
+
+    public void saveChanges() {
+        library.updateJson();
     }
 }

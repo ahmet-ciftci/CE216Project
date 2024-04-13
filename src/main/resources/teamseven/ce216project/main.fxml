@@ -82,6 +82,7 @@
                   <TableColumn fx:id="translatorsCol" prefWidth="75.0" text="Translator(s)" />
               </columns>
             </TableView>
+            <Button fx:id="saveChangesButton" layoutX="178.0" layoutY="40.0" mnemonicParsing="false" onAction="#saveChanges" text="Save Changes" />
          </children>
       </AnchorPane>
    </children>
