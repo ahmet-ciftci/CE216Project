@@ -236,7 +236,23 @@ public class MainController{
 
     public void showDetailedView() {
         int index = bookTable.getSelectionModel().getSelectedIndex();
-        if (index == -1){return;}
+        if (index == -1){
+            titleLabel.setText("Title: ");
+            authorsLabel.setText("Authors: ");
+            dateLabel.setText("Date: ");
+            tagsLabel.setText("Tags: ");
+            ratingLabel.setText("Rating: ");
+            subtitleLabel.setText("Subtitle: ");
+            isbnLabel.setText("ISBN: ");
+            publisherLabel.setText("Publisher: ");
+            editionLabel.setText("Edition: ");
+            numberOfPagesLabel.setText("Number of Pages: ");
+            coverLabel.setText("Cover: ");
+            languageLabel.setText("Language: ");
+            translatorsLabel.setText("Translators: ");
+            coverImage.setImage(null);
+            return;
+        }
         if (library.getFoundBooks().get(index).getTitle() == null) {
             titleLabel.setText("Title: ");
         } else {
