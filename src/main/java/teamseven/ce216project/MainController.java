@@ -234,6 +234,7 @@ public class MainController{
 
     public void showDetailedView() {
         int index = bookTable.getSelectionModel().getSelectedIndex();
+        if (index == -1){return;}
         if (library.getFoundBooks().get(index).getTitle() == null) {
             titleLabel.setText("Title: ");
         } else {
