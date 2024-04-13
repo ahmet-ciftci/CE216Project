@@ -247,7 +247,12 @@ public class MainController{
         coverLabel.setText("Cover: " + library.getFoundBooks().get(index).getCover());
         languageLabel.setText("Language: " + library.getFoundBooks().get(index).getLanguage());
         translatorsLabel.setText("Translators: " + library.getFoundBooks().get(index).getTranslators());
-        coverImage.setImage(new Image(library.getFoundBooks().get(index).getCoverPath()));
+        if(library.getFoundBooks().get(index).getCoverPath() == null) {
+            coverImage.setImage(null);
+        } else {
+            coverImage.setImage(new Image(library.getFoundBooks().get(index).getCoverPath()));
+        }
+
     }
 
 
