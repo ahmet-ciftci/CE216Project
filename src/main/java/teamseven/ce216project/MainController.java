@@ -234,19 +234,71 @@ public class MainController{
 
     public void showDetailedView() {
         int index = bookTable.getSelectionModel().getSelectedIndex();
-        titleLabel.setText("Title: " + library.getFoundBooks().get(index).getTitle());
-        authorsLabel.setText("Authors: " + library.getFoundBooks().get(index).getAuthors());
-        dateLabel.setText("Date: " + library.getFoundBooks().get(index).getDate());
-        tagsLabel.setText("Tags: " + library.getFoundBooks().get(index).getTags());
-        ratingLabel.setText("Rating: " + library.getFoundBooks().get(index).getRating());
-        subtitleLabel.setText("Subtitle: " + library.getFoundBooks().get(index).getSubtitle());
-        isbnLabel.setText("ISBN: " + library.getFoundBooks().get(index).getIsbn());
-        publisherLabel.setText("Publisher: " + library.getFoundBooks().get(index).getPublisher());
-        editionLabel.setText("Edition: " + library.getFoundBooks().get(index).getEdition());
-        numberOfPagesLabel.setText("Number of Pages: " + library.getFoundBooks().get(index).getNumberOfPages());
-        coverLabel.setText("Cover: " + library.getFoundBooks().get(index).getCover());
-        languageLabel.setText("Language: " + library.getFoundBooks().get(index).getLanguage());
-        translatorsLabel.setText("Translators: " + library.getFoundBooks().get(index).getTranslators());
+        if (library.getFoundBooks().get(index).getTitle() == null) {
+            titleLabel.setText("Title: ");
+        } else {
+            titleLabel.setText("Title: " + library.getFoundBooks().get(index).getTitle());
+        }
+        if(library.getFoundBooks().get(index).getAuthors() == null) {
+            authorsLabel.setText("Authors: ");
+        } else {
+            authorsLabel.setText("Authors: " + library.getFoundBooks().get(index).getAuthors());
+        }
+        if (library.getFoundBooks().get(index).getDate() == null) {
+            dateLabel.setText("Date: ");
+        } else {
+            dateLabel.setText("Date: " + library.getFoundBooks().get(index).getDate());
+        }
+        if (library.getFoundBooks().get(index).getTags() == null) {
+            tagsLabel.setText("Tags: ");
+        } else {
+            tagsLabel.setText("Tags: " + library.getFoundBooks().get(index).getTags());
+        }
+        if (library.getFoundBooks().get(index).getRating() == null) {
+            ratingLabel.setText("Rating: ");
+        } else {
+            ratingLabel.setText("Rating: " + library.getFoundBooks().get(index).getRating());
+        }
+        if (library.getFoundBooks().get(index).getSubtitle() == null) {
+            subtitleLabel.setText("Subtitle: ");
+        } else {
+            subtitleLabel.setText("Subtitle: " + library.getFoundBooks().get(index).getSubtitle());
+        }
+        if (library.getFoundBooks().get(index).getIsbn() == null) {
+            isbnLabel.setText("ISBN: ");
+        } else {
+            isbnLabel.setText("ISBN: " + library.getFoundBooks().get(index).getIsbn());
+        }
+        if (library.getFoundBooks().get(index).getPublisher() == null) {
+            publisherLabel.setText("Publisher: ");
+        } else {
+            publisherLabel.setText("Publisher: " + library.getFoundBooks().get(index).getPublisher());
+        }
+        if (library.getFoundBooks().get(index).getEdition() == null) {
+            editionLabel.setText("Edition: ");
+        } else {
+            editionLabel.setText("Edition: " + library.getFoundBooks().get(index).getEdition());
+        }
+        if (library.getFoundBooks().get(index).getNumberOfPages() == null) {
+            numberOfPagesLabel.setText("Number of Pages: ");
+        } else {
+            numberOfPagesLabel.setText("Number of Pages: " + library.getFoundBooks().get(index).getNumberOfPages());
+        }
+        if (library.getFoundBooks().get(index).getCover() == null) {
+            coverLabel.setText("Cover: ");
+        } else {
+            coverLabel.setText("Cover: " + library.getFoundBooks().get(index).getCover());
+        }
+        if (library.getFoundBooks().get(index).getLanguage() == null) {
+            languageLabel.setText("Language: ");
+        } else {
+            languageLabel.setText("Language: " + library.getFoundBooks().get(index).getLanguage());
+        }
+        if (library.getFoundBooks().get(index).getTranslators() == null) {
+            translatorsLabel.setText("Translators: ");
+        } else {
+            translatorsLabel.setText("Translators: " + library.getFoundBooks().get(index).getTranslators());
+        }
         if(library.getFoundBooks().get(index).getCoverPath() == null) {
             coverImage.setImage(null);
         } else {

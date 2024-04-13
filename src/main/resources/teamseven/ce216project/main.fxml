@@ -65,7 +65,7 @@
             </ScrollPane>
             <TextField layoutX="8.0" layoutY="93.0" prefHeight="28.0" prefWidth="457.0" promptText="Search" />
             <Button layoutX="412.0" layoutY="93.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="53.0" text="Tags" />
-            <TableView fx:id="bookTable" layoutX="8.0" layoutY="134.0" onMouseClicked="#showDetailedView" prefHeight="314.0" prefWidth="456.0" tableMenuButtonVisible="true">
+            <TableView fx:id="bookTable" layoutX="8.0" layoutY="134.0" onKeyPressed="#showDetailedView" onMouseClicked="#showDetailedView" prefHeight="314.0" prefWidth="456.0" tableMenuButtonVisible="true">
               <columns>
                 <TableColumn fx:id="titleCol" editable="false" prefWidth="75.0" text="Title" />
                 <TableColumn fx:id="authorsCol" prefWidth="75.0" text="Author(s)" />
