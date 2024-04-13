@@ -37,7 +37,7 @@ public class Library {
         File f = new File(documentsPath);
         jsonPath = f.getAbsolutePath() + File.separator + "default.json";
         if(!f.exists()){
-            f = new File(System.getProperty("user.home") + File.separator + "Documents", "TempLibrary");
+            f = new File(documentsPath, "TempLibrary");
             f.mkdir();
             updateJson();
         }
