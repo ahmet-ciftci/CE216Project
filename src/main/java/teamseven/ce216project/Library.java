@@ -18,7 +18,7 @@ public class Library {
     private ArrayList<Book> foundBooks;
     private ArrayList<String> uniqueTags;
     private String jsonPath;
-
+    private boolean isFound;
 
     public Library() {
         books = new ArrayList<Book>();
@@ -27,7 +27,6 @@ public class Library {
         jsonPath = "";
     }
 
-    private boolean isFound;
 
     public ArrayList<Book> getFoundBooks() {
         return foundBooks;
@@ -58,71 +57,90 @@ public class Library {
 
     // Complementary Search Methods
     private void searchForTitle(String string, Book book) {
-        if (book.getTitle() != null) {
-            if (book.getTitle().contains(string)) foundBooks.add(book);
+        if (book.getTitle() != null&&book.getTitle().contains(string)&& !book.getFound()) {
+            foundBooks.add(book);
+            book.setFound(true);
         }
     }
 
     private void searchForISBN(String string, Book book) {
-        if (book.getIsbn() != null) {
-            if (book.getIsbn().contains(string)) foundBooks.add(book);
+        if (book.getIsbn() != null&& !book.getFound()) {
+            if (book.getIsbn().contains(string)) {
+                foundBooks.add(book);
+                book.setFound(true);
+            }
         }
     }
 
     private void searchForSubtitle(String string, Book book) {
-        if (book.getSubtitle() != null) {
-            if (book.getSubtitle().contains(string)) foundBooks.add(book);
-
+        if (book.getSubtitle() != null&& !book.getFound()) {
+            if (book.getSubtitle().contains(string)){
+                foundBooks.add(book);
+                book.setFound(true);
+            }
         }
     }
 
     private void searchForPublisher(String string, Book book) {
-        if (book.getPublisher() != null) {
-            if (book.getPublisher().contains(string)) foundBooks.add(book);
-
+        if (book.getPublisher() != null&& !book.getFound()) {
+            if (book.getPublisher().contains(string)) {
+                foundBooks.add(book);
+                book.setFound(true);
+            }
         }
     }
 
     private void searchForLanguage(String string, Book book) {
-        if (book.getLanguage() != null) {
-            if (book.getLanguage().contains(string)) foundBooks.add(book);
-
+        if (book.getLanguage() != null&& !book.getFound()) {
+            if (book.getLanguage().contains(string)) {
+                book.setFound(true);
+                foundBooks.add(book);
+            }
         }
     }
 
     private void searchForDate(String string, Book book) {
-        if (book.getDate() != null) {
-            if (book.getDate().contains(string)) foundBooks.add(book);
-
+        if (book.getDate() != null&& !book.getFound()) {
+            if (book.getDate().contains(string)){
+                book.setFound(true);
+                foundBooks.add(book);
+            }
         }
     }
 
     private void searchForRating(String string, Book book) {
-        if (book.getRating() != null) {
-            if (book.getRating().contains(string)) foundBooks.add(book);
+        if (book.getRating() != null&& !book.getFound()) {
+            if (book.getRating().contains(string)){
+                book.setFound(true);
+                foundBooks.add(book);
+            }
         }
     }
 
     private void searchForEdition(String string, Book book) {
-        if (book.getEdition() != null) {
-            if (book.getEdition().contains(string)) foundBooks.add(book);
-
+        if (book.getEdition() != null&& !book.getFound()) {
+            if (book.getEdition().contains(string)){
+                book.setFound(true);
+                foundBooks.add(book);
+            }
         }
     }
 
     private void searchForNumberOfPages(String string, Book book) {
-        if (book.getNumberOfPages() != null) {
-            if (book.getNumberOfPages().contains(string)) foundBooks.add(book);
-
+        if (book.getNumberOfPages() != null&& !book.getFound()) {
+            if (book.getNumberOfPages().contains(string)){
+                book.setFound(true);
+                foundBooks.add(book);
+            }
         }
     }
 
     private void searchForAuthor(String string, Book book) {
         if (book.getAuthors() != null) {
             for (int i = 0; i < book.getAuthors().size(); i++) {
-                if (book.getAuthors().get(i).contains(string)) {
+                if (book.getAuthors().get(i).contains(string)&& !book.getFound()) {
+                    book.setFound(true);
                     foundBooks.add(book);
-
                 }
             }
         }
@@ -131,9 +149,9 @@ public class Library {
     private void searchForTranslator(String string, Book book) {
         if (book.getTranslators() != null) {
             for (int i = 0; i < book.getTranslators().size(); i++) {
-                if (book.getTranslators().get(i).contains(string)) {
+                if (book.getTranslators().get(i).contains(string)&& !book.getFound()) {
+                    book.setFound(true);
                     foundBooks.add(book);
-
                 }
             }
         }
@@ -155,25 +173,22 @@ public class Library {
         isFound = false;
     }
 
-    public void filterByTags(ArrayList<String> tags) {
-        foundBooks.clear();
-        ArrayList<Boolean> bool = new ArrayList<>();
-        for (Book book : books) {
-            if (book.getTags() != null) {
-                for (String s : book.getTags()) {
-                    for (String tag : tags) {
-                        if (s.equals(tag)) isFound = true;
+    public void filterByTags(ArrayList<String> tags, Book book) {
+        isFound=false;
+        if(book.getTags()!=null&&tags!=null){
+            for (String tag: tags){
+                if(!book.getFound()) {
+                    for (String bookTag : book.getTags()) {
+                        if (tag.equals(bookTag)) {
+                            isFound =true;
+                        }
                     }
-                    bool.add(isFound);
-                }
-
-                for (Boolean b : bool) {
-                    if (!b) {
-                        isFound = false;
+                    if (!isFound) {
                         break;
                     }
+                    book.setFound(true);
+                    foundBooks.add(book);
                 }
-                if (isFound) foundBooks.add(book);
             }
         }
     }

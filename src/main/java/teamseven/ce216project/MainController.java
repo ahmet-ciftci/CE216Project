@@ -207,8 +207,30 @@ public class MainController{
     }
 
 
-    private ArrayList<Book> searchList(String searchedWord){
-        library.search(searchedWord);
-        return library.getFoundBooks();
+    public void searchList(ActionEvent event) {
+        for (Book book : books){
+            book.setFound(false);
+        }
+        String book = searchBar.getText();
+        library.search(book);
+        refreshTableView();
+
+    }
+
+    public void searchTags(ActionEvent event) {
+        if(library.getFoundBooks()!=null)library.getFoundBooks().clear();
+        for (Book book : books) {
+            book.setFound(false);
+        }
+        ArrayList<String> tags = new ArrayList<>();
+        String input = searchBar.getText();
+        String[] t = input.split(", ");
+        for (String tag : t) {
+            tags.add(tag);
+        }
+        for (Book book : books) {
+            library.filterByTags(tags, book);
+        }
+        refreshTableView();
     }
 }
