@@ -261,11 +261,13 @@ public class Library {
     public void importJson(String path) {
         Gson gson = new Gson();
         Scanner scanner = null;
-        String jsonFormat;
+        String jsonFormat = "";
 
         try {
             scanner = new Scanner(Paths.get(path));
-            jsonFormat = scanner.nextLine();        // Gets the .json as string
+            while (scanner.hasNextLine()){
+                jsonFormat += scanner.nextLine();        // Gets the .json as string
+            }
 
             Type foundListType = new TypeToken<ArrayList<Book>>() {
             }.getType();

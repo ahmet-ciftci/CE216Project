@@ -228,6 +228,8 @@ public class MainController{
         file.setTitle("Choose Export Location");
         File f = file.showOpenDialog(stage);
         library.importJson(f.getPath());
+        library.search(null);
+        refreshTableView();
     }
 
     public void showDetailedView() {
