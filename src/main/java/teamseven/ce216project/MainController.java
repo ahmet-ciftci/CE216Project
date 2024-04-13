@@ -265,20 +265,22 @@ public class MainController{
     }
 
     public void searchTags(ActionEvent event) {
-        library.setFoundBooks(library.getBooks());
-        if(library.getFoundBooks()!=null)library.getFoundBooks().clear();
-        for (Book book : books) {
-            book.setFound(false);
-            System.out.println(book.getTitle());
-        }
-        ArrayList<String> tags = new ArrayList<>();
-        String input = searchBar.getText();
-        String[] t = input.split(", ");
-        for (String tag : t) {
-            tags.add(tag);
-        }
-        for (Book book : books) {
-            library.filterByTags(tags, book);
+        library.setFoundBooks(new ArrayList<>(library.getBooks()));
+        if(!searchBar.getText().isBlank()) {
+            if (library.getFoundBooks() != null) library.getFoundBooks().clear();
+            for (Book book : library.getBooks()) {
+                book.setFound(false);
+                System.out.println(book.getTitle());
+            }
+            ArrayList<String> tags = new ArrayList<>();
+            String input = searchBar.getText();
+            String[] t = input.split(", ");
+            for (String tag : t) {
+                tags.add(tag);
+            }
+            for (Book book : library.getBooks()) {
+                library.filterByTags(tags, book);
+            }
         }
         refreshTableView();
     }
