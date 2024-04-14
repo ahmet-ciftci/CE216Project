@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -91,6 +92,8 @@ public class MainController{
     private Label translatorsLabel;
     @FXML
     private ImageView coverImage;
+    @FXML
+    private Pane imagePane;
 
     public void initialize(Library library) {
         this.library = library;
@@ -109,6 +112,8 @@ public class MainController{
         coverCol.setCellValueFactory(new PropertyValueFactory<>("cover"));
         languageCol.setCellValueFactory(new PropertyValueFactory<>("language"));
         translatorsCol.setCellValueFactory(new PropertyValueFactory<>("translators"));
+        coverImage.fitHeightProperty().bind(imagePane.heightProperty());
+        coverImage.fitWidthProperty().bind(imagePane.widthProperty());
 
 
     }
