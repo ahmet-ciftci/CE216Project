@@ -210,10 +210,7 @@ public class MainController{
     public void handleDeleteButton() {
         int index = bookTable.getSelectionModel().getSelectedIndex();
         Book bookToDelete = bookTable.getSelectionModel().getSelectedItem();
-        if(!searchBar.getText().isBlank()){
-            library.getFoundBooks().remove(index);
-        }
-
+        library.getFoundBooks().remove(index);
         books.remove(index);
         library.deleteBook(bookToDelete);
         refreshTableView();

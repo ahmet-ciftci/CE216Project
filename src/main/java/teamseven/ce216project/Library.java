@@ -268,7 +268,6 @@ public class Library {
                                 rating, ArrayList<String> authors, ArrayList<String> translators, ArrayList<String> tags) {
         books.add(new Book(title, subtitle, isbn, publisher, date, edition, numberOfPages, cover, coverPath, language, rating, authors, translators, tags));
         //addTag(tags);
-        updateJson();
         search(null);
     }
 
@@ -290,8 +289,6 @@ public class Library {
 
 
         }
-        updateJson();
-
     }
 
     public String getJsonPath() {
