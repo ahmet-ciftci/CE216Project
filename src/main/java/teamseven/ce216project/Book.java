@@ -18,6 +18,8 @@ public class Book {
     private final ArrayList<String> translators;
     private final ArrayList<String> tags;
 
+    private boolean Found;
+
     public Book(String title, String subtitle, String isbn, String publisher, String date, String edition, String numberOfPages, String cover, String coverPath, String language, String rating, ArrayList<String> authors, ArrayList<String> translators, ArrayList<String> tags) {
         this.title = title;
         this.subtitle = subtitle;
@@ -90,4 +92,8 @@ public class Book {
     public ArrayList<String> getTags() {
         return tags;
     }
+
+    public boolean getFound() {return Found;}
+
+    public void setFound(boolean found) {Found = found;}
 }

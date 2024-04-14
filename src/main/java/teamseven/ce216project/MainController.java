@@ -16,6 +16,8 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -61,6 +63,9 @@ public class MainController{
     private TableColumn<Book, String> languageCol;
     @FXML
     private TableColumn<Book, ArrayList<String>> translatorsCol;
+
+    @FXML
+    private TextField searchBar;
 
     private ObservableList<Book> books;
 
@@ -205,7 +210,11 @@ public class MainController{
     public void handleDeleteButton() {
         int index = bookTable.getSelectionModel().getSelectedIndex();
         Book bookToDelete = bookTable.getSelectionModel().getSelectedItem();
-        library.getFoundBooks().remove(index);
+        if(!searchBar.getText().isBlank()){
+            library.getFoundBooks().remove(index);
+        }
+
+        books.remove(index);
         library.deleteBook(bookToDelete);
         refreshTableView();
     }
@@ -334,5 +343,36 @@ public class MainController{
 
     public void saveChanges() {
         library.updateJson();
+    }
+
+
+    public void searchList(ActionEvent event) {
+        for (Book book : books){
+            book.setFound(false);
+        }
+        String txt = searchBar.getText();
+        library.search(txt);
+        refreshTableView();
+
+    }
+
+    public void searchTags(ActionEvent event) {
+        library.setFoundBooks(new ArrayList<>(library.getBooks()));
+        if(!searchBar.getText().isBlank()) {
+            if (library.getFoundBooks() != null) library.getFoundBooks().clear();
+            for (Book book : library.getBooks()) {
+                book.setFound(false);
+            }
+            ArrayList<String> tags = new ArrayList<>();
+            String input = searchBar.getText();
+            String[] t = input.split(", ");
+            for (String tag : t) {
+                tags.add(tag);
+            }
+            for (Book book : library.getBooks()) {
+                library.filterByTags(tags, book);
+            }
+        }
+        refreshTableView();
     }
 }
