@@ -39,7 +39,7 @@ public class Library {
         File f = new File(documentsPath);
         jsonPath = f.getAbsolutePath() + File.separator + "default.json";
         if(!f.exists()){
-            f = new File(documentsPath, "TempLibrary");
+            f = new File(documentsPath);
             f.mkdir();
             updateJson();
         }
