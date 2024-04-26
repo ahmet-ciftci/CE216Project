@@ -168,6 +168,7 @@ public class MainController{
             AddEditController controller = fxmlLoader.getController();
 
             int index = bookTable.getSelectionModel().getSelectedIndex();
+            if (index == -1){return;}
             controller.setBookToEdit(library.getFoundBooks().get(index));
 
             Dialog<ButtonType> dialog = new Dialog<>();
@@ -209,6 +210,7 @@ public class MainController{
 
     public void handleDeleteButton() {
         int index = bookTable.getSelectionModel().getSelectedIndex();
+        if (index == -1){return;}
         Book bookToDelete = bookTable.getSelectionModel().getSelectedItem();
         library.getFoundBooks().remove(index);
         books.remove(index);
@@ -228,8 +230,10 @@ public class MainController{
         FileChooser.ExtensionFilter fileExtensions = new FileChooser.ExtensionFilter("JSON File","*.json");
         file.getExtensionFilters().add(fileExtensions);
         file.setTitle("Choose Export Location");
-        File f = file.showSaveDialog(stage);
-        library.exportJson(f.getPath());
+        try {
+            File f = file.showSaveDialog(stage);
+            library.exportJson(f.getPath());
+        } catch (NullPointerException e) {return;}
     }
 
     public void importJsonPath() {
@@ -239,19 +243,21 @@ public class MainController{
         FileChooser.ExtensionFilter fileExtensions = new FileChooser.ExtensionFilter("JSON File","*.json");
         file.getExtensionFilters().add(fileExtensions);
         file.setTitle("Choose Export Location");
-        File f = file.showOpenDialog(stage);
-        library.importJson(f.getPath());
-        library.search(null);
-        refreshTableView();
+        try {
+            File f = file.showOpenDialog(stage);
+            library.importJson(f.getPath());
+            library.search(null);
+            refreshTableView();
+        } catch (NullPointerException e) {return;}
     }
 
     public void showDetailedView() {
         int index = bookTable.getSelectionModel().getSelectedIndex();
         if (index == -1){
             titleLabel.setText("Title: ");
-            authorsLabel.setText("Authors: ");
+            authorsLabel.setText("Author(s): ");
             dateLabel.setText("Date: ");
-            tagsLabel.setText("Tags: ");
+            tagsLabel.setText("Tag(s): ");
             ratingLabel.setText("Rating: ");
             subtitleLabel.setText("Subtitle: ");
             isbnLabel.setText("ISBN: ");
@@ -260,7 +266,7 @@ public class MainController{
             numberOfPagesLabel.setText("Number of Pages: ");
             coverLabel.setText("Cover: ");
             languageLabel.setText("Language: ");
-            translatorsLabel.setText("Translators: ");
+            translatorsLabel.setText("Translator(s): ");
             coverImage.setImage(null);
             return;
         }
@@ -270,9 +276,9 @@ public class MainController{
             titleLabel.setText("Title: " + library.getFoundBooks().get(index).getTitle());
         }
         if(library.getFoundBooks().get(index).getAuthors() == null) {
-            authorsLabel.setText("Authors: ");
+            authorsLabel.setText("Author(s): ");
         } else {
-            authorsLabel.setText("Authors: " + library.getFoundBooks().get(index).getAuthors());
+            authorsLabel.setText("Author(s): " + library.getFoundBooks().get(index).getAuthors());
         }
         if (library.getFoundBooks().get(index).getDate() == null) {
             dateLabel.setText("Date: ");
@@ -280,9 +286,9 @@ public class MainController{
             dateLabel.setText("Date: " + library.getFoundBooks().get(index).getDate());
         }
         if (library.getFoundBooks().get(index).getTags() == null) {
-            tagsLabel.setText("Tags: ");
+            tagsLabel.setText("Tag(s): ");
         } else {
-            tagsLabel.setText("Tags: " + library.getFoundBooks().get(index).getTags());
+            tagsLabel.setText("Tag(s): " + library.getFoundBooks().get(index).getTags());
         }
         if (library.getFoundBooks().get(index).getRating() == null) {
             ratingLabel.setText("Rating: ");
@@ -325,9 +331,9 @@ public class MainController{
             languageLabel.setText("Language: " + library.getFoundBooks().get(index).getLanguage());
         }
         if (library.getFoundBooks().get(index).getTranslators() == null) {
-            translatorsLabel.setText("Translators: ");
+            translatorsLabel.setText("Translator(s): ");
         } else {
-            translatorsLabel.setText("Translators: " + library.getFoundBooks().get(index).getTranslators());
+            translatorsLabel.setText("Translator(s): " + library.getFoundBooks().get(index).getTranslators());
         }
         if(library.getFoundBooks().get(index).getCoverPath() == null) {
             coverImage.setImage(null);
