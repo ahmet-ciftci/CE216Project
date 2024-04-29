@@ -120,7 +120,22 @@ public class MainController{
         coverImage.fitHeightProperty().bind(imagePane.heightProperty());
         coverImage.fitWidthProperty().bind(imagePane.widthProperty());
 
+        disableDeleteButton();
+        disableEditButton();
+    }
 
+    private void disableDeleteButton() {
+        deleteButton.setDisable(ifAnyRowSelected());
+    }
+    private void disableEditButton() {
+        editButton.setDisable(ifAnyRowSelected());
+    }
+
+    public boolean ifAnyRowSelected() {
+        if(bookTable.getSelectionModel().getSelectedIndex() < 0) {
+            return true;
+        }
+        return false;
     }
 
     public void handleAddButton() {
@@ -221,6 +236,8 @@ public class MainController{
     public void refreshTableView(){
         books = FXCollections.observableArrayList(library.getFoundBooks());
         bookTable.setItems(books);
+        disableEditButton();
+        disableDeleteButton();
     }
 
     public void exportJsonPath() {
@@ -340,7 +357,8 @@ public class MainController{
         } else {
             coverImage.setImage(new Image(library.getFoundBooks().get(index).getCoverPath()));
         }
-
+        disableDeleteButton();
+        disableEditButton();
     }
 
 
