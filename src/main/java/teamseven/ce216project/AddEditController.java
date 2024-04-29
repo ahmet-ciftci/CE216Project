@@ -1,5 +1,7 @@
 package teamseven.ce216project;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -74,6 +76,49 @@ public class AddEditController {
     private String coverPath;
 
     private Book bookToEdit;
+
+    public void initialize() {
+        try {
+            numberOfPagesField.textProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue != null && !newValue.matches("\\d*")) {
+                    numberOfPagesField.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            });
+
+            ISBNField.textProperty().addListener((observable, oldValue, newValue) -> {
+                if (ISBNField.getText() != null) {
+                    String isbn = ISBNField.getText().replaceAll("-", "");
+                    if (!isbn.matches("^$|\\d{1,13}")) {
+                        ISBNField.setText(oldValue);
+                    } else {
+                        // Add hyphens at specific locations for ISBN-13
+                        if (isbn.length() > 3) isbn = isbn.substring(0, 3) + "-" + isbn.substring(3);
+                        if (isbn.length() > 5) isbn = isbn.substring(0, 5) + "-" + isbn.substring(5);
+                        if (isbn.length() > 8) isbn = isbn.substring(0, 8) + "-" + isbn.substring(8);
+                        if (isbn.length() > 15) isbn = isbn.substring(0, 15) + "-" + isbn.substring(15);
+                        ISBNField.setText(isbn);
+                    }
+                }
+            });
+
+
+            ratingField.textProperty().addListener((observable, oldValue, newValue) -> {
+                if (ratingField.getText() != null) {
+                    String rating = ratingField.getText().replaceAll("\\.", "");
+                    if (!rating.matches("^$|[0-4]|[0-4][1-9]|5")) {
+                        ratingField.setText(oldValue);
+                    } else {
+                        if (rating.length() > 1) rating = rating.substring(0, 1) + "." + rating.substring(1);
+                        ratingField.setText(rating);
+                    }
+                }
+            });
+        }catch (Exception e) {
+            System.err.println(e);
+        }
+
+    }
+
 
 
     @FXML
@@ -185,7 +230,11 @@ public class AddEditController {
         String text = ISBNField.getText();
         if(text != null) {
             if (text.isBlank()) return null;
+            else if( !text.matches("\\d{3}-\\d-\\d{2}-\\d{6}-\\d")){
+                return null;
+            }
         }
+
         return text;
     }
 

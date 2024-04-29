@@ -170,7 +170,7 @@ public class MainController{
 
             }
         } catch (IOException e) {
-            System.err.println(e);
+
         }
         refreshTableView();
 
@@ -189,6 +189,7 @@ public class MainController{
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setTitle("Edit a book");
             dialog.setDialogPane(bookDialogPane);
+            controller.initialize();
 
             Optional<ButtonType> buttonType = dialog.showAndWait();
             if(buttonType.get() == ButtonType.APPLY) {
