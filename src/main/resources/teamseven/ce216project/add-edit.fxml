@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
 <DialogPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="teamseven.ce216project.AddEditController">
    <content>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="527.0" prefWidth="600.0">
@@ -73,7 +72,7 @@
                               <Button fx:id="deleteImageButton" layoutX="182.0" mnemonicParsing="false" onAction="#handleDeleteCoverPath" prefHeight="26.0" prefWidth="90.0" text="Delete Image" />
                               <Button fx:id="loadImageButton" layoutX="88.0" mnemonicParsing="false" onAction="#handleLoadCoverPath" prefHeight="0.0" prefWidth="81.0" text="Load Image" />
                               <Label layoutY="3.0" text="Cover Image:" />
-                              <ImageView fx:id="imageView" fitHeight="119.0" fitWidth="94.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="imageView" fitHeight="119.0" fitWidth="94.0" layoutY="37.0" onDragDropped="#handleDragDropCoverImage" onDragOver="#handleDragOverCoverImage" pickOnBounds="true" preserveRatio="true" />
                            </children>
                         </AnchorPane>
                         <AnchorPane GridPane.rowIndex="5">

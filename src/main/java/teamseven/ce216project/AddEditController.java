@@ -9,6 +9,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -204,6 +207,27 @@ public class AddEditController {
     private void handleDeleteCoverPath(ActionEvent event){
         coverPath = null;
         imageView.setImage(null);
+    }
+    @FXML
+    public void handleDragDropCoverImage(DragEvent event) {
+        Dragboard dragboard = event.getDragboard();
+        if(dragboard.hasFiles() || dragboard.hasImage()){
+            String imagePath = dragboard.getFiles().getFirst().toURI().toString();
+            if(imagePath.endsWith(".jpg") || imagePath.endsWith(".png")) {
+                coverPath = imagePath;
+                imageView.setImage(new Image(coverPath));
+            }
+
+        }
+    }
+
+    public void handleDragOverCoverImage(DragEvent event) {
+        Dragboard dragboard = event.getDragboard();
+        if(dragboard.hasFiles() || dragboard.hasImage()){
+            event.acceptTransferModes(TransferMode.COPY);
+        }
+
+        event.consume();
     }
 
     public String getTitleField() {
