@@ -1,5 +1,6 @@
 package teamseven.ce216project;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,8 +17,6 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 
@@ -40,11 +39,11 @@ public class MainController{
     @FXML
     private TableColumn<Book, String> titleCol;
     @FXML
-    private TableColumn<Book, ArrayList<String>> authorsCol;
+    private TableColumn<Book, String> authorsCol;
     @FXML
     private TableColumn<Book, String> dateCol;
     @FXML
-    private TableColumn<Book, ArrayList<String>> tagsCol;
+    private TableColumn<Book, String> tagsCol;
     @FXML
     private TableColumn<Book, String> ratingCol;
     @FXML
@@ -62,7 +61,7 @@ public class MainController{
     @FXML
     private TableColumn<Book, String> languageCol;
     @FXML
-    private TableColumn<Book, ArrayList<String>> translatorsCol;
+    private TableColumn<Book, String> translatorsCol;
 
     @FXML
     private TextField searchBar;
@@ -105,8 +104,8 @@ public class MainController{
         library.importJson(library.getJsonPath());
         refreshTableView();
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
-        authorsCol.setCellValueFactory(new PropertyValueFactory<>("authors"));
-        tagsCol.setCellValueFactory(new PropertyValueFactory<>("tags"));
+        authorsCol.setCellValueFactory(cellData -> new SimpleStringProperty(authorsToString(cellData.getValue().getAuthors())));
+        tagsCol.setCellValueFactory(cellData -> new SimpleStringProperty(authorsToString(cellData.getValue().getTags())));
         dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
         ratingCol.setCellValueFactory(new PropertyValueFactory<>("rating"));
         subtitleCol.setCellValueFactory(new PropertyValueFactory<>("subtitle"));
@@ -116,7 +115,7 @@ public class MainController{
         pagesCol.setCellValueFactory(new PropertyValueFactory<>("numberOfPages"));
         coverCol.setCellValueFactory(new PropertyValueFactory<>("cover"));
         languageCol.setCellValueFactory(new PropertyValueFactory<>("language"));
-        translatorsCol.setCellValueFactory(new PropertyValueFactory<>("translators"));
+        translatorsCol.setCellValueFactory(cellData -> new SimpleStringProperty(authorsToString(cellData.getValue().getTranslators())));
         coverImage.fitHeightProperty().bind(imagePane.heightProperty());
         coverImage.fitWidthProperty().bind(imagePane.widthProperty());
 
@@ -378,5 +377,35 @@ public class MainController{
             }
         }
         refreshTableView();
+    }
+
+    private String authorsToString(ArrayList<String> authors) {
+        String s = "";
+        if(authors == null) return "";
+        for (String author : authors) {
+            s = s.concat(author + ", ");
+        }
+        s = s.substring(0, s.length() - 2);
+        return s;
+    }
+
+    private String tagsToString(ArrayList<String> tags) {
+        String s = "";
+        if(tags == null) return "";
+        for (String tag : tags) {
+            s = s.concat(tag + ", ");
+        }
+        s = s.substring(0, s.length() - 2);
+        return s;
+    }
+
+    private String translatorsToString(ArrayList<String> translators) {
+        String s = "";
+        if(translators == null) return "";
+        for (String translator : translators) {
+            s = s.concat(translator + ", ");
+        }
+        s = s.substring(0, s.length() - 2);
+        return s;
     }
 }
