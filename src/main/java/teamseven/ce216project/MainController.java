@@ -184,7 +184,7 @@ public class MainController{
 
             int index = bookTable.getSelectionModel().getSelectedIndex();
             if (index == -1){return;}
-            controller.setBookToEdit(library.getFoundBooks().get(index));
+            controller.setBookToEdit(books.get(index));
 
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setTitle("Edit a book");
@@ -210,11 +210,14 @@ public class MainController{
                     return;
                 }
                 Book book = new Book(controller.getTitleField(),controller.getSubtitleField(),controller.getISBNField(),controller.getPublisherField(),controller.getDateField(),controller.getEditionField(),controller.getNumberOfPagesField(),controller.getCoverField(), controller.getCoverPath(),controller.getLanguageField(),controller.getRatingField(),controller.getAuthorList(),controller.getTranslatorList(),controller.getTagList());
-                Book oldBook = library.getFoundBooks().get(index);
-                library.getFoundBooks().set(index, book);
+                Book oldBook = bookTable.getSelectionModel().getSelectedItem();
+
+                books.set(index, book);
                 if (library.getSameBookIndex(oldBook) != -1){
                     library.getBooks().set(library.getSameBookIndex(oldBook), book);
-
+                }
+                if(library.getSameFoundBookIndex(oldBook) != -1){
+                    library.getFoundBooks().set(library.getSameFoundBookIndex(oldBook), book);
                 }
                 refreshTableView();
             }
@@ -228,9 +231,9 @@ public class MainController{
         int index = bookTable.getSelectionModel().getSelectedIndex();
         if (index == -1){return;}
         Book bookToDelete = bookTable.getSelectionModel().getSelectedItem();
-        library.getFoundBooks().remove(index);
         books.remove(index);
         library.deleteBook(bookToDelete);
+        library.getFoundBooks().remove(bookToDelete);
         refreshTableView();
     }
 
