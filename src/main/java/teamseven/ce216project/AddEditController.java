@@ -4,21 +4,25 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 import java.io.File;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class AddEditController {
     @FXML
     private TextField titleField;
     @FXML
-    private TextField dateField;
+    private DatePicker dateField;
     @FXML
     private TextField ratingField;
     @FXML
@@ -158,7 +162,9 @@ public class AddEditController {
     }
 
     public String getDateField() {
-        String text = dateField.getText();
+        if (dateField.getValue() == null) {return null;}
+        LocalDate date = dateField.getValue();
+        String text = date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         if(text != null) {
             if (text.isBlank()) return null;
         }
@@ -255,7 +261,9 @@ public class AddEditController {
         this.bookToEdit = bookToEdit;
 
         titleField.setText(bookToEdit.getTitle());
-        dateField.setText(bookToEdit.getDate());
+        if (bookToEdit.getDate() != null) {
+            dateField.setValue(LocalDate.parse(bookToEdit.getDate(), DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        }
         ratingField.setText(bookToEdit.getRating());
         if(bookToEdit.getAuthors() != null){
             authorList.setItems(FXCollections.observableList(bookToEdit.getAuthors()));
@@ -278,5 +286,23 @@ public class AddEditController {
             translatorList.setItems(FXCollections.observableList(bookToEdit.getTranslators()));
         }
 
+    }
+
+    public void initialize() {
+        dateField.setConverter(new StringConverter<LocalDate>() {
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
+            @Override
+            public String toString(LocalDate date) {
+                if (date != null) {return dateFormatter.format(date);}
+                else {return "";}
+            }
+
+            @Override
+            public LocalDate fromString(String string) {
+                if (string != null && !string.isEmpty()) {return LocalDate.parse(string, dateFormatter);}
+                else {return null;}
+            }
+        });
     }
 }

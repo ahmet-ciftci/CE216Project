@@ -166,6 +166,7 @@ public class MainController{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("add-edit.fxml"));
             DialogPane bookDialogPane = fxmlLoader.load();
             AddEditController controller = fxmlLoader.getController();
+            controller.initialize();
 
             int index = bookTable.getSelectionModel().getSelectedIndex();
             if (index == -1){return;}
