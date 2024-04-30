@@ -1,7 +1,6 @@
 package teamseven.ce216project;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -79,6 +78,7 @@ public class AddEditController {
 
     public void initialize() {
         try {
+
             numberOfPagesField.textProperty().addListener((observable, oldValue, newValue) -> {
                 if (newValue != null && !newValue.matches("\\d*")) {
                     numberOfPagesField.setText(newValue.replaceAll("[^\\d]", ""));
@@ -96,7 +96,12 @@ public class AddEditController {
                         if (isbn.length() > 5) isbn = isbn.substring(0, 5) + "-" + isbn.substring(5);
                         if (isbn.length() > 8) isbn = isbn.substring(0, 8) + "-" + isbn.substring(8);
                         if (isbn.length() > 15) isbn = isbn.substring(0, 15) + "-" + isbn.substring(15);
-                        ISBNField.setText(isbn);
+                        String finalIsbn = isbn;
+                        Platform.runLater(() -> {
+                            ISBNField.setText(finalIsbn);
+                            ISBNField.positionCaret(finalIsbn.length());
+                        });
+
                     }
                 }
             });
@@ -108,13 +113,20 @@ public class AddEditController {
                     if (!rating.matches("^$|[0-4]|[0-4][1-9]|5")) {
                         ratingField.setText(oldValue);
                     } else {
+
                         if (rating.length() > 1) rating = rating.substring(0, 1) + "." + rating.substring(1);
-                        ratingField.setText(rating);
+                        String finalRating = rating;
+                        Platform.runLater(() -> {
+                            ratingField.setText(finalRating);
+                            ratingField.positionCaret(finalRating.length());
+                        });
+
                     }
                 }
             });
+
         }catch (Exception e) {
-            System.err.println(e);
+            System.err.println();
         }
 
     }
