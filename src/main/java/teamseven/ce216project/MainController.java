@@ -104,8 +104,8 @@ public class MainController{
         library.importJson(library.getJsonPath());
         refreshTableView();
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
-        authorsCol.setCellValueFactory(cellData -> new SimpleStringProperty(authorsToString(cellData.getValue().getAuthors())));
-        tagsCol.setCellValueFactory(cellData -> new SimpleStringProperty(authorsToString(cellData.getValue().getTags())));
+        authorsCol.setCellValueFactory(cellData -> new SimpleStringProperty(arayListToString(cellData.getValue().getAuthors())));
+        tagsCol.setCellValueFactory(cellData -> new SimpleStringProperty(arayListToString(cellData.getValue().getTags())));
         dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
         ratingCol.setCellValueFactory(new PropertyValueFactory<>("rating"));
         subtitleCol.setCellValueFactory(new PropertyValueFactory<>("subtitle"));
@@ -115,7 +115,7 @@ public class MainController{
         pagesCol.setCellValueFactory(new PropertyValueFactory<>("numberOfPages"));
         coverCol.setCellValueFactory(new PropertyValueFactory<>("cover"));
         languageCol.setCellValueFactory(new PropertyValueFactory<>("language"));
-        translatorsCol.setCellValueFactory(cellData -> new SimpleStringProperty(authorsToString(cellData.getValue().getTranslators())));
+        translatorsCol.setCellValueFactory(cellData -> new SimpleStringProperty(arayListToString(cellData.getValue().getTranslators())));
         coverImage.fitHeightProperty().bind(imagePane.heightProperty());
         coverImage.fitWidthProperty().bind(imagePane.widthProperty());
 
@@ -278,7 +278,7 @@ public class MainController{
         if(library.getFoundBooks().get(index).getAuthors() == null) {
             authorsLabel.setText("Author(s): ");
         } else {
-            authorsLabel.setText("Author(s): " + library.getFoundBooks().get(index).getAuthors());
+            authorsLabel.setText("Author(s): " + arayListToString(library.getFoundBooks().get(index).getAuthors()));
         }
         if (library.getFoundBooks().get(index).getDate() == null) {
             dateLabel.setText("Date: ");
@@ -288,7 +288,7 @@ public class MainController{
         if (library.getFoundBooks().get(index).getTags() == null) {
             tagsLabel.setText("Tag(s): ");
         } else {
-            tagsLabel.setText("Tag(s): " + library.getFoundBooks().get(index).getTags());
+            tagsLabel.setText("Tag(s): " + arayListToString(library.getFoundBooks().get(index).getTags()));
         }
         if (library.getFoundBooks().get(index).getRating() == null) {
             ratingLabel.setText("Rating: ");
@@ -333,7 +333,7 @@ public class MainController{
         if (library.getFoundBooks().get(index).getTranslators() == null) {
             translatorsLabel.setText("Translator(s): ");
         } else {
-            translatorsLabel.setText("Translator(s): " + library.getFoundBooks().get(index).getTranslators());
+            translatorsLabel.setText("Translator(s): " + arayListToString(library.getFoundBooks().get(index).getTranslators()));
         }
         if(library.getFoundBooks().get(index).getCoverPath() == null) {
             coverImage.setImage(null);
@@ -379,31 +379,11 @@ public class MainController{
         refreshTableView();
     }
 
-    private String authorsToString(ArrayList<String> authors) {
+    private String arayListToString(ArrayList<String> authors) {
         String s = "";
         if(authors == null) return "";
         for (String author : authors) {
             s = s.concat(author + ", ");
-        }
-        s = s.substring(0, s.length() - 2);
-        return s;
-    }
-
-    private String tagsToString(ArrayList<String> tags) {
-        String s = "";
-        if(tags == null) return "";
-        for (String tag : tags) {
-            s = s.concat(tag + ", ");
-        }
-        s = s.substring(0, s.length() - 2);
-        return s;
-    }
-
-    private String translatorsToString(ArrayList<String> translators) {
-        String s = "";
-        if(translators == null) return "";
-        for (String translator : translators) {
-            s = s.concat(translator + ", ");
         }
         s = s.substring(0, s.length() - 2);
         return s;
