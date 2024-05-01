@@ -22,6 +22,7 @@ import java.util.Optional;
 
 public class MainController{
     private Library library;
+    private ArrayList<String> previouslySelected;
     @FXML
     private Button exportButton;
     @FXML
@@ -34,6 +35,8 @@ public class MainController{
     private Button deleteButton;
     @FXML
     private Button saveChangesButton;
+    @FXML
+    private Button tagsButton;
     @FXML
     private TableView<Book> bookTable;
     @FXML
@@ -127,6 +130,7 @@ public class MainController{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("add-edit.fxml"));
             DialogPane bookDialogPane = fxmlLoader.load();
             AddEditController controller = fxmlLoader.getController();
+            controller.initialize();
 
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setTitle("Add a book");
@@ -200,12 +204,36 @@ public class MainController{
                     library.getBooks().set(library.getSameBookIndex(oldBook), book);
 
                 }
+                library.deleteTag(oldBook);
+                library.addTag(book);
                 refreshTableView();
             }
 
         } catch (IOException e) {
             System.err.println(e);
         }
+    }
+    public void handleTagsButton() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("tag-selector.fxml"));
+            DialogPane tagsDialogPane = fxmlLoader.load();
+            TagSelectorController controller = fxmlLoader.getController();
+            controller.initialize(library.getUniqueTags(), previouslySelected);
+
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setTitle("Choose tags");
+            dialog.setDialogPane(tagsDialogPane);
+
+            Optional<ButtonType> buttonType = dialog.showAndWait();
+            if(buttonType.get() == ButtonType.APPLY){
+                searchTags(controller.getSelectedTags());
+                previouslySelected = controller.getSelectedTags();
+            }
+        } catch (IOException e) {
+            System.err.println(e);
+        }
+        refreshTableView();
+
     }
 
     public void handleDeleteButton() {
@@ -359,21 +387,15 @@ public class MainController{
 
     }
 
-    public void searchTags(ActionEvent event) {
+    public void searchTags(ArrayList<String> selectedTags) {
         library.setFoundBooks(new ArrayList<>(library.getBooks()));
-        if(!searchBar.getText().isBlank()) {
+        if(selectedTags != null) {
             if (library.getFoundBooks() != null) library.getFoundBooks().clear();
             for (Book book : library.getBooks()) {
                 book.setFound(false);
             }
-            ArrayList<String> tags = new ArrayList<>();
-            String input = searchBar.getText();
-            String[] t = input.split(", ");
-            for (String tag : t) {
-                tags.add(tag);
-            }
             for (Book book : library.getBooks()) {
-                library.filterByTags(tags, book);
+                library.filterByTags(selectedTags, book);
             }
         }
         refreshTableView();
