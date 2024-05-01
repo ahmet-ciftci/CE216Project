@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -201,7 +202,11 @@ public class AddEditController {
             imageView.setImage(new Image(imagePath));
             coverPath = imagePath;
         }
+    }
 
+    @FXML
+    private void hanldeImageViewClick(MouseEvent event){
+        handleLoadCoverPath(new ActionEvent());
     }
     @FXML
     private void handleDeleteCoverPath(ActionEvent event){
@@ -217,7 +222,6 @@ public class AddEditController {
                 coverPath = imagePath;
                 imageView.setImage(new Image(coverPath));
             }
-
         }
     }
 
