@@ -105,6 +105,7 @@ public class MainController{
     public void initialize(Library library) {
         this.library = library;
         library.importJson(library.getJsonPath());
+        for (Book book : library.getBooks()) {library.addTag(book);}
         refreshTableView();
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
         authorsCol.setCellValueFactory(cellData -> new SimpleStringProperty(arrayListToString(cellData.getValue().getAuthors())));
