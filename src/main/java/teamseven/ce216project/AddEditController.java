@@ -138,6 +138,22 @@ public class AddEditController {
             System.err.println();
         }
 
+        dateField.setConverter(new StringConverter<LocalDate>() {
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
+            @Override
+            public String toString(LocalDate date) {
+                if (date != null) {return dateFormatter.format(date);}
+                else {return "";}
+            }
+
+            @Override
+            public LocalDate fromString(String string) {
+                if (string != null && !string.isEmpty()) {return LocalDate.parse(string, dateFormatter);}
+                else {return null;}
+            }
+        });
+
     }
 
 
@@ -383,23 +399,5 @@ public class AddEditController {
             translatorList.setItems(FXCollections.observableList(bookToEdit.getTranslators()));
         }
 
-    }
-
-    public void initialize() {
-        dateField.setConverter(new StringConverter<LocalDate>() {
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-
-            @Override
-            public String toString(LocalDate date) {
-                if (date != null) {return dateFormatter.format(date);}
-                else {return "";}
-            }
-
-            @Override
-            public LocalDate fromString(String string) {
-                if (string != null && !string.isEmpty()) {return LocalDate.parse(string, dateFormatter);}
-                else {return null;}
-            }
-        });
     }
 }
