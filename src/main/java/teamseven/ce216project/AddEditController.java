@@ -381,7 +381,13 @@ public class AddEditController {
 
         titleField.setText(bookToEdit.getTitle());
         if (bookToEdit.getDate() != null) {
-            dateField.setValue(LocalDate.parse(bookToEdit.getDate(), DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+            try{
+                dateField.setValue(LocalDate.parse(bookToEdit.getDate(), DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+            }
+            catch (Exception e){
+                dateField.setValue(null);
+            }
+
         }
         ratingField.setText(bookToEdit.getRating());
         if(bookToEdit.getAuthors() != null){
