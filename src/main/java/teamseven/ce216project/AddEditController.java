@@ -219,20 +219,33 @@ public class AddEditController {
         File file = fc.showOpenDialog(stage);
 
         if(file != null) {
-            String imagePath = file.toURI().toString();
-            imageView.setImage(new Image(imagePath));
-            coverPath = imagePath;
+            try {
+                Image image;
+                if (file.exists()) {
+                    image = new Image(file.toURI().toString());
+                } else {
+                    image = new Image(getClass().getResource("default.png").openStream());
+                }
+                imageView.setImage(image);
+            } catch (IOException e) {
+                System.out.println();
+            }
+            coverPath = new File(file.toURI()).getAbsolutePath();
         }
     }
 
     @FXML
-    private void hanldeImageViewClick(MouseEvent event){
+    private void handleImageViewClick(MouseEvent event){
         handleLoadCoverPath(new ActionEvent());
     }
     @FXML
     private void handleDeleteCoverPath(ActionEvent event){
         coverPath = null;
-        imageView.setImage(null);
+        try {
+            imageView.setImage(new Image(getClass().getResource("default.png").openStream()));
+        } catch (IOException e) {
+            System.out.println();
+        }
     }
     @FXML
     public void handleDragDropCoverImage(DragEvent event) {
@@ -376,7 +389,7 @@ public class AddEditController {
         }
         coverPath = bookToEdit.getCoverPath();
         if(coverPath != null) {
-            imageView.setImage(new Image(coverPath));
+            imageView.setImage(new Image(new File(coverPath).toURI().toString()));
         }
         else{
             try {

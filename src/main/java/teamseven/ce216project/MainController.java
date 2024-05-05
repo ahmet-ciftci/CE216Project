@@ -246,7 +246,15 @@ public class MainController{
 
             Optional<ButtonType> buttonType = dialog.showAndWait();
             if(buttonType.get() == ButtonType.APPLY){
-                searchTags(controller.getSelectedTags());
+                if (controller.getSelectedTags().isEmpty()) {
+                    for (Book book : books){
+                        book.setFound(false);
+                    }
+                    library.search("");
+                    refreshTableView();
+                } else {
+                    searchTags(controller.getSelectedTags());
+                }
                 previouslySelected = controller.getSelectedTags();
             }
         } catch (IOException e) {
@@ -392,7 +400,18 @@ public class MainController{
                 System.out.println();
             }
         } else {
-            coverImage.setImage(new Image(library.getFoundBooks().get(index).getCoverPath()));
+            try {
+                File file = new File(library.getFoundBooks().get(index).getCoverPath());
+                Image image;
+                if (file.exists()) {
+                    image = new Image(file.toURI().toString());
+                } else {
+                    image = new Image(getClass().getResource("default.png").openStream());
+                }
+                coverImage.setImage(image);
+            } catch (IOException e) {
+                System.out.println();
+            }
         }
         disableDeleteButton();
         disableEditButton();
@@ -405,6 +424,7 @@ public class MainController{
 
 
     public void searchList(ActionEvent event) {
+        previouslySelected = null;
         for (Book book : books){
             book.setFound(false);
         }

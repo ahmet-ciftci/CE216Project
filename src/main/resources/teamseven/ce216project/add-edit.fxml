@@ -74,7 +74,7 @@
                               <Button fx:id="deleteImageButton" layoutX="182.0" mnemonicParsing="false" onAction="#handleDeleteCoverPath" prefHeight="26.0" prefWidth="90.0" text="Delete Image" />
                               <Button fx:id="loadImageButton" layoutX="88.0" mnemonicParsing="false" onAction="#handleLoadCoverPath" prefHeight="0.0" prefWidth="81.0" text="Load Image" />
                               <Label layoutY="3.0" text="Cover Image:" />
-                              <ImageView fx:id="imageView" fitHeight="119.0" fitWidth="94.0" layoutY="37.0" onDragDropped="#handleDragDropCoverImage" onDragOver="#handleDragOverCoverImage" onMouseClicked="#hanldeImageViewClick" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="imageView" fitHeight="119.0" fitWidth="94.0" layoutY="37.0" onDragDropped="#handleDragDropCoverImage" onDragOver="#handleDragOverCoverImage" onMouseClicked="#handleImageViewClick" pickOnBounds="true" preserveRatio="true">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor></ImageView>
