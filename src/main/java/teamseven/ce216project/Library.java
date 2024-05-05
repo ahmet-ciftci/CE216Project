@@ -314,4 +314,13 @@ public class Library {
         }
         return -1;
     }
+
+    public int getSameFoundBookIndex(Book book){
+        for (int i = 0; i < foundBooks.size(); i++) {
+            if(Objects.equals(foundBooks.get(i), book)){
+                return i;
+            }
+        }
+        return -1;
+    }
 }

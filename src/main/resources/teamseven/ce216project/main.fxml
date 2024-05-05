@@ -41,19 +41,19 @@
                               </AnchorPane>
                               <TableView fx:id="bookTable" onKeyPressed="#showDetailedView" onMouseClicked="#showDetailedView" prefHeight="314.0" prefWidth="537.0" tableMenuButtonVisible="true" VBox.vgrow="ALWAYS">
                                 <columns>
-                                  <TableColumn fx:id="titleCol" editable="false" prefWidth="75.0" sortable="false" text="Title" />
-                                  <TableColumn fx:id="authorsCol" editable="false" prefWidth="75.0" sortable="false" text="Author(s)" />
-                                    <TableColumn fx:id="dateCol" editable="false" prefWidth="75.0" sortable="false" text="Date" />
-                                    <TableColumn fx:id="tagsCol" editable="false" prefWidth="75.0" sortable="false" text="Tag(s)" />
-                                    <TableColumn fx:id="ratingCol" editable="false" prefWidth="75.0" sortable="false" text="Rating" />
-                                    <TableColumn fx:id="subtitleCol" editable="false" prefWidth="75.0" sortable="false" text="Subtitle" />
-                                    <TableColumn fx:id="ISBNCol" editable="false" prefWidth="75.0" sortable="false" text="ISBN" />
-                                    <TableColumn fx:id="publisherCol" editable="false" prefWidth="75.0" sortable="false" text="Publisher" />
-                                    <TableColumn fx:id="editionCol" editable="false" prefWidth="75.0" sortable="false" text="Edition" />
-                                    <TableColumn fx:id="pagesCol" editable="false" prefWidth="75.0" sortable="false" text="Number of Pages" />
-                                    <TableColumn fx:id="coverCol" editable="false" prefWidth="75.0" sortable="false" text="Cover" />
-                                    <TableColumn fx:id="languageCol" editable="false" prefWidth="75.0" sortable="false" text="Language" />
-                                    <TableColumn fx:id="translatorsCol" editable="false" prefWidth="75.0" sortable="false" text="Translator(s)" />
+                                  <TableColumn fx:id="titleCol" editable="false" prefWidth="75.0" text="Title" />
+                                  <TableColumn fx:id="authorsCol" editable="false" prefWidth="75.0" text="Author(s)" />
+                                    <TableColumn fx:id="dateCol" editable="false" prefWidth="75.0" text="Date" />
+                                    <TableColumn fx:id="tagsCol" editable="false" prefWidth="75.0" text="Tag(s)" />
+                                    <TableColumn fx:id="ratingCol" editable="false" prefWidth="75.0" text="Rating" />
+                                    <TableColumn fx:id="subtitleCol" editable="false" prefWidth="75.0" text="Subtitle" />
+                                    <TableColumn fx:id="ISBNCol" editable="false" prefWidth="75.0" text="ISBN" />
+                                    <TableColumn fx:id="publisherCol" editable="false" prefWidth="75.0" text="Publisher" />
+                                    <TableColumn fx:id="editionCol" editable="false" prefWidth="75.0" text="Edition" />
+                                    <TableColumn fx:id="pagesCol" editable="false" prefWidth="75.0" text="Number of Pages" />
+                                    <TableColumn fx:id="coverCol" editable="false" prefWidth="75.0" text="Cover" />
+                                    <TableColumn fx:id="languageCol" editable="false" prefWidth="75.0" text="Language" />
+                                    <TableColumn fx:id="translatorsCol" editable="false" prefWidth="75.0" text="Translator(s)" />
                                 </columns>
                                  <VBox.margin>
                                     <Insets top="10.0" />

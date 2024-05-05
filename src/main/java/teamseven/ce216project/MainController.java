@@ -123,7 +123,22 @@ public class MainController{
         coverImage.fitHeightProperty().bind(imagePane.heightProperty());
         coverImage.fitWidthProperty().bind(imagePane.widthProperty());
 
+        disableDeleteButton();
+        disableEditButton();
+    }
 
+    private void disableDeleteButton() {
+        deleteButton.setDisable(ifAnyRowSelected());
+    }
+    private void disableEditButton() {
+        editButton.setDisable(ifAnyRowSelected());
+    }
+
+    public boolean ifAnyRowSelected() {
+        if(bookTable.getSelectionModel().getSelectedIndex() < 0) {
+            return true;
+        }
+        return false;
     }
 
     public void handleAddButton() {
@@ -159,7 +174,7 @@ public class MainController{
 
             }
         } catch (IOException e) {
-            System.err.println(e);
+
         }
         refreshTableView();
 
@@ -174,11 +189,12 @@ public class MainController{
 
             int index = bookTable.getSelectionModel().getSelectedIndex();
             if (index == -1){return;}
-            controller.setBookToEdit(library.getFoundBooks().get(index));
+            controller.setBookToEdit(books.get(index));
 
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setTitle("Edit a book");
             dialog.setDialogPane(bookDialogPane);
+            controller.initialize();
 
             Optional<ButtonType> buttonType = dialog.showAndWait();
             if(buttonType.get() == ButtonType.APPLY) {
@@ -199,11 +215,14 @@ public class MainController{
                     return;
                 }
                 Book book = new Book(controller.getTitleField(),controller.getSubtitleField(),controller.getISBNField(),controller.getPublisherField(),controller.getDateField(),controller.getEditionField(),controller.getNumberOfPagesField(),controller.getCoverField(), controller.getCoverPath(),controller.getLanguageField(),controller.getRatingField(),controller.getAuthorList(),controller.getTranslatorList(),controller.getTagList());
-                Book oldBook = library.getFoundBooks().get(index);
-                library.getFoundBooks().set(index, book);
+                Book oldBook = bookTable.getSelectionModel().getSelectedItem();
+
+                books.set(index, book);
                 if (library.getSameBookIndex(oldBook) != -1){
                     library.getBooks().set(library.getSameBookIndex(oldBook), book);
-
+                }
+                if(library.getSameFoundBookIndex(oldBook) != -1){
+                    library.getFoundBooks().set(library.getSameFoundBookIndex(oldBook), book);
                 }
                 library.deleteTag(oldBook);
                 library.addTag(book);
@@ -241,15 +260,17 @@ public class MainController{
         int index = bookTable.getSelectionModel().getSelectedIndex();
         if (index == -1){return;}
         Book bookToDelete = bookTable.getSelectionModel().getSelectedItem();
-        library.getFoundBooks().remove(index);
         books.remove(index);
         library.deleteBook(bookToDelete);
+        library.getFoundBooks().remove(bookToDelete);
         refreshTableView();
     }
 
     public void refreshTableView(){
         books = FXCollections.observableArrayList(library.getFoundBooks());
         bookTable.setItems(books);
+        disableEditButton();
+        disableDeleteButton();
     }
 
     public void exportJsonPath() {
@@ -373,7 +394,8 @@ public class MainController{
         } else {
             coverImage.setImage(new Image(library.getFoundBooks().get(index).getCoverPath()));
         }
-
+        disableDeleteButton();
+        disableEditButton();
     }
 
 
