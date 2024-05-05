@@ -448,11 +448,11 @@ public class MainController{
         refreshTableView();
     }
 
-    private String arrayListToString(ArrayList<String> authors) {
+    private String arrayListToString(ArrayList<String> arr) {
         String s = "";
-        if(authors == null) return "";
-        for (String author : authors) {
-            s = s.concat(author + ", ");
+        if(arr == null || arr.isEmpty()) return "";
+        for (String item : arr) {
+            s = s.concat(item + ", ");
         }
         s = s.substring(0, s.length() - 2);
         return s;
