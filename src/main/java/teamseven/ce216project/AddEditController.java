@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -271,6 +272,13 @@ public class AddEditController {
         coverPath = bookToEdit.getCoverPath();
         if(coverPath != null) {
             imageView.setImage(new Image(coverPath));
+        }
+        else{
+            try {
+                imageView.setImage(new Image(getClass().getResource("default.png").openStream()));
+            } catch (IOException e) {
+                System.out.println();
+            }
         }
         if(bookToEdit.getTags() != null){
             tagList.setItems(FXCollections.observableList(bookToEdit.getTags()));

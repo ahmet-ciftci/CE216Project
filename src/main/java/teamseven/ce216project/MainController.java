@@ -365,7 +365,11 @@ public class MainController{
             translatorsLabel.setText("Translator(s): " + arrayListToString(library.getFoundBooks().get(index).getTranslators()));
         }
         if(library.getFoundBooks().get(index).getCoverPath() == null) {
-            coverImage.setImage(null);
+            try {
+                coverImage.setImage(new Image(getClass().getResource("default.png").openStream()));
+            } catch (IOException e) {
+                System.out.println();
+            }
         } else {
             coverImage.setImage(new Image(library.getFoundBooks().get(index).getCoverPath()));
         }
