@@ -1,5 +1,6 @@
 package teamseven.ce216project;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,13 +17,12 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 
 public class MainController{
     private Library library;
+    private ArrayList<String> previouslySelected;
     @FXML
     private Button exportButton;
     @FXML
@@ -36,15 +36,17 @@ public class MainController{
     @FXML
     private Button saveChangesButton;
     @FXML
+    private Button tagsButton;
+    @FXML
     private TableView<Book> bookTable;
     @FXML
     private TableColumn<Book, String> titleCol;
     @FXML
-    private TableColumn<Book, ArrayList<String>> authorsCol;
+    private TableColumn<Book, String> authorsCol;
     @FXML
     private TableColumn<Book, String> dateCol;
     @FXML
-    private TableColumn<Book, ArrayList<String>> tagsCol;
+    private TableColumn<Book, String> tagsCol;
     @FXML
     private TableColumn<Book, String> ratingCol;
     @FXML
@@ -62,7 +64,7 @@ public class MainController{
     @FXML
     private TableColumn<Book, String> languageCol;
     @FXML
-    private TableColumn<Book, ArrayList<String>> translatorsCol;
+    private TableColumn<Book, String> translatorsCol;
 
     @FXML
     private TextField searchBar;
@@ -103,10 +105,11 @@ public class MainController{
     public void initialize(Library library) {
         this.library = library;
         library.importJson(library.getJsonPath());
+        for (Book book : library.getBooks()) {library.addTag(book);}
         refreshTableView();
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
-        authorsCol.setCellValueFactory(new PropertyValueFactory<>("authors"));
-        tagsCol.setCellValueFactory(new PropertyValueFactory<>("tags"));
+        authorsCol.setCellValueFactory(cellData -> new SimpleStringProperty(arrayListToString(cellData.getValue().getAuthors())));
+        tagsCol.setCellValueFactory(cellData -> new SimpleStringProperty(arrayListToString(cellData.getValue().getTags())));
         dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
         ratingCol.setCellValueFactory(new PropertyValueFactory<>("rating"));
         subtitleCol.setCellValueFactory(new PropertyValueFactory<>("subtitle"));
@@ -116,7 +119,7 @@ public class MainController{
         pagesCol.setCellValueFactory(new PropertyValueFactory<>("numberOfPages"));
         coverCol.setCellValueFactory(new PropertyValueFactory<>("cover"));
         languageCol.setCellValueFactory(new PropertyValueFactory<>("language"));
-        translatorsCol.setCellValueFactory(new PropertyValueFactory<>("translators"));
+        translatorsCol.setCellValueFactory(cellData -> new SimpleStringProperty(arrayListToString(cellData.getValue().getTranslators())));
         coverImage.fitHeightProperty().bind(imagePane.heightProperty());
         coverImage.fitWidthProperty().bind(imagePane.widthProperty());
 
@@ -128,6 +131,7 @@ public class MainController{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("add-edit.fxml"));
             DialogPane bookDialogPane = fxmlLoader.load();
             AddEditController controller = fxmlLoader.getController();
+            controller.initialize();
 
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setTitle("Add a book");
@@ -166,6 +170,7 @@ public class MainController{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("add-edit.fxml"));
             DialogPane bookDialogPane = fxmlLoader.load();
             AddEditController controller = fxmlLoader.getController();
+            controller.initialize();
 
             int index = bookTable.getSelectionModel().getSelectedIndex();
             if (index == -1){return;}
@@ -200,12 +205,36 @@ public class MainController{
                     library.getBooks().set(library.getSameBookIndex(oldBook), book);
 
                 }
+                library.deleteTag(oldBook);
+                library.addTag(book);
                 refreshTableView();
             }
 
         } catch (IOException e) {
             System.err.println(e);
         }
+    }
+    public void handleTagsButton() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("tag-selector.fxml"));
+            DialogPane tagsDialogPane = fxmlLoader.load();
+            TagSelectorController controller = fxmlLoader.getController();
+            controller.initialize(library.getUniqueTags(), previouslySelected);
+
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setTitle("Choose tags");
+            dialog.setDialogPane(tagsDialogPane);
+
+            Optional<ButtonType> buttonType = dialog.showAndWait();
+            if(buttonType.get() == ButtonType.APPLY){
+                searchTags(controller.getSelectedTags());
+                previouslySelected = controller.getSelectedTags();
+            }
+        } catch (IOException e) {
+            System.err.println(e);
+        }
+        refreshTableView();
+
     }
 
     public void handleDeleteButton() {
@@ -278,7 +307,7 @@ public class MainController{
         if(library.getFoundBooks().get(index).getAuthors() == null) {
             authorsLabel.setText("Author(s): ");
         } else {
-            authorsLabel.setText("Author(s): " + library.getFoundBooks().get(index).getAuthors());
+            authorsLabel.setText("Author(s): " + arrayListToString(library.getFoundBooks().get(index).getAuthors()));
         }
         if (library.getFoundBooks().get(index).getDate() == null) {
             dateLabel.setText("Date: ");
@@ -288,7 +317,7 @@ public class MainController{
         if (library.getFoundBooks().get(index).getTags() == null) {
             tagsLabel.setText("Tag(s): ");
         } else {
-            tagsLabel.setText("Tag(s): " + library.getFoundBooks().get(index).getTags());
+            tagsLabel.setText("Tag(s): " + arrayListToString(library.getFoundBooks().get(index).getTags()));
         }
         if (library.getFoundBooks().get(index).getRating() == null) {
             ratingLabel.setText("Rating: ");
@@ -333,10 +362,14 @@ public class MainController{
         if (library.getFoundBooks().get(index).getTranslators() == null) {
             translatorsLabel.setText("Translator(s): ");
         } else {
-            translatorsLabel.setText("Translator(s): " + library.getFoundBooks().get(index).getTranslators());
+            translatorsLabel.setText("Translator(s): " + arrayListToString(library.getFoundBooks().get(index).getTranslators()));
         }
         if(library.getFoundBooks().get(index).getCoverPath() == null) {
-            coverImage.setImage(null);
+            try {
+                coverImage.setImage(new Image(getClass().getResource("default.png").openStream()));
+            } catch (IOException e) {
+                System.out.println();
+            }
         } else {
             coverImage.setImage(new Image(library.getFoundBooks().get(index).getCoverPath()));
         }
@@ -359,23 +392,27 @@ public class MainController{
 
     }
 
-    public void searchTags(ActionEvent event) {
+    public void searchTags(ArrayList<String> selectedTags) {
         library.setFoundBooks(new ArrayList<>(library.getBooks()));
-        if(!searchBar.getText().isBlank()) {
+        if(selectedTags != null) {
             if (library.getFoundBooks() != null) library.getFoundBooks().clear();
             for (Book book : library.getBooks()) {
                 book.setFound(false);
             }
-            ArrayList<String> tags = new ArrayList<>();
-            String input = searchBar.getText();
-            String[] t = input.split(", ");
-            for (String tag : t) {
-                tags.add(tag);
-            }
             for (Book book : library.getBooks()) {
-                library.filterByTags(tags, book);
+                library.filterByTags(selectedTags, book);
             }
         }
         refreshTableView();
+    }
+
+    private String arrayListToString(ArrayList<String> authors) {
+        String s = "";
+        if(authors == null) return "";
+        for (String author : authors) {
+            s = s.concat(author + ", ");
+        }
+        s = s.substring(0, s.length() - 2);
+        return s;
     }
 }

@@ -45,6 +45,9 @@ public class Library {
         }
     }
 
+    public ArrayList<String> getUniqueTags() {
+        return uniqueTags;
+    }
 
     public ArrayList<Book> getFoundBooks() {
         return foundBooks;
@@ -183,19 +186,17 @@ public class Library {
     //and Management
 
     public void addTag(Book book) {
-        isFound = false;
+        if (book.getTags() == null) {return;}
+        tagChecker:
         for (String s : book.getTags()) {
-            for (String uniqueS : uniqueTags) {
-                if (uniqueS.equals(s)) {
-                    isFound = true;
-                    break;
+            for (String tag : uniqueTags) {
+                if (tag.equals(s)) {
+                    continue tagChecker;
                 }
+                // Proceed to check other tags if a tag is found in any existing book
             }
-            if (!isFound) {
-                uniqueTags.add(s);
-            }
+            uniqueTags.add(s); //Remove a tag if it has not been found in any existing book.
         }
-        isFound = false;
     }
 
     public void filterByTags(ArrayList<String> tags, Book book) {
@@ -266,28 +267,34 @@ public class Library {
     public void addBook(String title, String subtitle, String isbn, String publisher, String date, String
             edition, String numberOfPages, String cover, String coverPath, String language, String
                                 rating, ArrayList<String> authors, ArrayList<String> translators, ArrayList<String> tags) {
-        books.add(new Book(title, subtitle, isbn, publisher, date, edition, numberOfPages, cover, coverPath, language, rating, authors, translators, tags));
-        //addTag(tags);
+        Book book = new Book(title, subtitle, isbn, publisher, date, edition, numberOfPages, cover, coverPath, language, rating, authors, translators, tags);
+        books.add(book);
+        addTag(book);
         search(null);
     }
 
     public void deleteBook(Book bookToDelete) {
         books.remove(bookToDelete);
+        deleteTag(bookToDelete);
+    }
 
+    public void deleteTag(Book bookToDelete) {
         // Check if deleted book's tags appear in any existing book
         ArrayList<String> tagsToCheck = bookToDelete.getTags();
         if(tagsToCheck != null) {
             tagChecker:
             for (String tag : tagsToCheck) {
                 for (Book book : books) {
-                    if (book.getTags().contains(tag)) {
-                        continue tagChecker;
-                    } // Proceed to check other tags if a tag is found in any existing book
+                    if (book.getTags() == null) {continue;}
+                    for (String s : book.getTags()) {
+                        if (s.equals(tag)) {
+                            continue tagChecker;
+                        }
+                    }
+                    // Proceed to check other tags if a tag is found in any existing book
                 }
                 uniqueTags.remove(tag); //Remove a tag if it has not been found in any existing book.
             }
-
-
         }
     }
 
