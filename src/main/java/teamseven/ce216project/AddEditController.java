@@ -105,12 +105,13 @@ public class AddEditController {
                         if (isbn.length() > 5) isbn = isbn.substring(0, 5) + "-" + isbn.substring(5);
                         if (isbn.length() > 8) isbn = isbn.substring(0, 8) + "-" + isbn.substring(8);
                         if (isbn.length() > 15) isbn = isbn.substring(0, 15) + "-" + isbn.substring(15);
-                        String finalIsbn = isbn;
-                        Platform.runLater(() -> {
-                            ISBNField.setText(finalIsbn);
-                            ISBNField.positionCaret(finalIsbn.length());
-                        });
-
+                        if (!isbn.equals(newValue)) {
+                            String finalIsbn = isbn;
+                            Platform.runLater(() -> {
+                                ISBNField.setText(finalIsbn);
+                                ISBNField.positionCaret(finalIsbn.length());
+                            });
+                        }
                     }
                 }
             });
@@ -124,12 +125,13 @@ public class AddEditController {
                     } else {
 
                         if (rating.length() > 1) rating = rating.substring(0, 1) + "." + rating.substring(1);
-                        String finalRating = rating;
-                        Platform.runLater(() -> {
-                            ratingField.setText(finalRating);
-                            ratingField.positionCaret(finalRating.length());
-                        });
-
+                        if (!rating.equals(newValue)) {
+                            String finalRating = rating;
+                            Platform.runLater(() -> {
+                                ratingField.setText(finalRating);
+                                ratingField.positionCaret(finalRating.length());
+                            });
+                        }
                     }
                 }
             });
