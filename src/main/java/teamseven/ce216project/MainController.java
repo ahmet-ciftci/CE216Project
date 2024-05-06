@@ -7,6 +7,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,8 +18,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.IOException;
+import java.awt.*;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -456,5 +460,29 @@ public class MainController{
         }
         s = s.substring(0, s.length() - 2);
         return s;
+    }
+
+
+    @FXML
+    public void handleHelp() {
+        try {
+            // Get the file as a stream
+            InputStream is = getClass().getResourceAsStream("Help.pdf");
+
+            File tempFile = File.createTempFile("Help", ".pdf"); // Temporary file and copy the resource to it
+            tempFile.deleteOnExit();
+            try (OutputStream os = new FileOutputStream(tempFile)) {
+                byte[] buffer = new byte[1024];
+                int length;
+                while ((length = is.read(buffer)) != -1) {
+                    os.write(buffer, 0, length);
+                }
+            }
+            if (Desktop.isDesktopSupported()) {
+                Desktop.getDesktop().open(tempFile);
+            }
+        } catch (IOException ex) {
+
+        }
     }
 }
