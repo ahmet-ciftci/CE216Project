@@ -397,7 +397,18 @@ public class AddEditController {
         }
         coverPath = bookToEdit.getCover();
         if(coverPath != null) {
-            imageView.setImage(new Image(new File(coverPath).toURI().toString()));
+            try {
+                File file = new File(coverPath);
+                Image image;
+                if (file.exists()) {
+                    image = new Image(file.toURI().toString());
+                } else {
+                    image = new Image(getClass().getResource("default.png").openStream());
+                }
+                imageView.setImage(image);
+            } catch (IOException e) {
+                System.out.println();
+            }
         }
         else{
             try {
