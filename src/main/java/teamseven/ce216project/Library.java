@@ -251,7 +251,8 @@ public class Library {
 
             Type foundListType = new TypeToken<ArrayList<Book>>() {
             }.getType();
-            books = gson.fromJson(jsonFormat, foundListType);                   //  Parses the string into books array
+            ArrayList<Book> importedBooks = gson.fromJson(jsonFormat, foundListType);                   //  Parses the string into books array
+            books.addAll(importedBooks);
         } catch (JsonSyntaxException e) {
             System.err.println("Json has syntax error exception");
         } catch (IOException e) {
