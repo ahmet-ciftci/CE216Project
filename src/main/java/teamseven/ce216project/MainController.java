@@ -117,7 +117,7 @@ public class MainController{
         publisherCol.setCellValueFactory(new PropertyValueFactory<>("publisher"));
         editionCol.setCellValueFactory(new PropertyValueFactory<>("edition"));
         pagesCol.setCellValueFactory(new PropertyValueFactory<>("numberOfPages"));
-        coverCol.setCellValueFactory(new PropertyValueFactory<>("cover"));
+        coverCol.setCellValueFactory(new PropertyValueFactory<>("coverType"));
         languageCol.setCellValueFactory(new PropertyValueFactory<>("language"));
         translatorsCol.setCellValueFactory(cellData -> new SimpleStringProperty(arrayListToString(cellData.getValue().getTranslators())));
         coverImage.fitHeightProperty().bind(imagePane.heightProperty());
@@ -378,10 +378,10 @@ public class MainController{
         } else {
             numberOfPagesLabel.setText("Number of Pages: " + library.getFoundBooks().get(index).getNumberOfPages());
         }
-        if (library.getFoundBooks().get(index).getCover() == null) {
+        if (library.getFoundBooks().get(index).getCoverType() == null) {
             coverLabel.setText("Cover: ");
         } else {
-            coverLabel.setText("Cover: " + library.getFoundBooks().get(index).getCover());
+            coverLabel.setText("Cover: " + library.getFoundBooks().get(index).getCoverType());
         }
         if (library.getFoundBooks().get(index).getLanguage() == null) {
             languageLabel.setText("Language: ");
@@ -393,7 +393,7 @@ public class MainController{
         } else {
             translatorsLabel.setText("Translator(s): " + arrayListToString(library.getFoundBooks().get(index).getTranslators()));
         }
-        if(library.getFoundBooks().get(index).getCoverPath() == null) {
+        if(library.getFoundBooks().get(index).getCover() == null) {
             try {
                 coverImage.setImage(new Image(getClass().getResource("default.png").openStream()));
             } catch (IOException e) {
@@ -401,7 +401,7 @@ public class MainController{
             }
         } else {
             try {
-                File file = new File(library.getFoundBooks().get(index).getCoverPath());
+                File file = new File(library.getFoundBooks().get(index).getCover());
                 Image image;
                 if (file.exists()) {
                     image = new Image(file.toURI().toString());

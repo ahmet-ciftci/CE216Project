@@ -253,8 +253,8 @@ public class AddEditController {
         if(dragboard.hasFiles() || dragboard.hasImage()){
             String imagePath = dragboard.getFiles().getFirst().toURI().toString();
             if(imagePath.endsWith(".jpg") || imagePath.endsWith(".png")) {
-                coverPath = imagePath;
-                imageView.setImage(new Image(coverPath));
+                imageView.setImage(new Image(imagePath));
+                coverPath = new File(dragboard.getFiles().getFirst().toURI()).getAbsolutePath();
             }
         }
     }
@@ -393,7 +393,7 @@ public class AddEditController {
         if(bookToEdit.getAuthors() != null){
             authorList.setItems(FXCollections.observableList(bookToEdit.getAuthors()));
         }
-        coverPath = bookToEdit.getCoverPath();
+        coverPath = bookToEdit.getCover();
         if(coverPath != null) {
             imageView.setImage(new Image(new File(coverPath).toURI().toString()));
         }
@@ -412,7 +412,7 @@ public class AddEditController {
         publisherField.setText(bookToEdit.getPublisher());
         editionField.setText(bookToEdit.getEdition());
         numberOfPagesField.setText(bookToEdit.getNumberOfPages());
-        coverField.setText(bookToEdit.getCover());
+        coverField.setText(bookToEdit.getCoverType());
         languageField.setText(bookToEdit.getLanguage());
         if(bookToEdit.getTranslators() != null) {
             translatorList.setItems(FXCollections.observableList(bookToEdit.getTranslators()));

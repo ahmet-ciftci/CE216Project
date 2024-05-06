@@ -10,8 +10,8 @@ public class Book {
     private final String date;
     private final String edition;
     private final String numberOfPages;
+    private final String coverType;
     private final String cover;
-    private final String coverPath;
     private final String language;
     private final String rating;
     private final ArrayList<String> authors;
@@ -20,7 +20,7 @@ public class Book {
 
     private boolean Found;
 
-    public Book(String title, String subtitle, String isbn, String publisher, String date, String edition, String numberOfPages, String cover, String coverPath, String language, String rating, ArrayList<String> authors, ArrayList<String> translators, ArrayList<String> tags) {
+    public Book(String title, String subtitle, String isbn, String publisher, String date, String edition, String numberOfPages, String coverType, String cover, String language, String rating, ArrayList<String> authors, ArrayList<String> translators, ArrayList<String> tags) {
         this.title = title;
         this.subtitle = subtitle;
         this.isbn = isbn;
@@ -28,8 +28,8 @@ public class Book {
         this.date = date;
         this.edition = edition;
         this.numberOfPages = numberOfPages;
+        this.coverType = coverType;
         this.cover = cover;
-        this.coverPath = coverPath;
         this.language = language;
         this.rating = rating;
         this.authors = authors;
@@ -65,12 +65,12 @@ public class Book {
         return numberOfPages;
     }
 
-    public String getCover() {
-        return cover;
+    public String getCoverType() {
+        return coverType;
     }
 
-    public String getCoverPath() {
-        return coverPath;
+    public String getCover() {
+        return cover;
     }
 
     public String getLanguage() {
