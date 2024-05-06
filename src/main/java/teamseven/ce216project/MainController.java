@@ -300,7 +300,7 @@ public class MainController{
         file.setInitialFileName("library.json");
         FileChooser.ExtensionFilter fileExtensions = new FileChooser.ExtensionFilter("JSON File","*.json");
         file.getExtensionFilters().add(fileExtensions);
-        file.setTitle("Choose Export Location");
+        file.setTitle("Choose Import Location");
         try {
             File f = file.showOpenDialog(stage);
             library.importJson(f.getPath());
