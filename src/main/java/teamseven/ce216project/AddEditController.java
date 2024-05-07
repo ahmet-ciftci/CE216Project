@@ -393,7 +393,7 @@ public class AddEditController {
         }
         ratingField.setText(bookToEdit.getRating());
         if(bookToEdit.getAuthors() != null){
-            authorList.setItems(FXCollections.observableList(bookToEdit.getAuthors()));
+            authorList.setItems(FXCollections.observableList(new ArrayList<>(bookToEdit.getAuthors())));
         }
         coverPath = bookToEdit.getCover();
         if(coverPath != null) {
@@ -418,7 +418,7 @@ public class AddEditController {
             }
         }
         if(bookToEdit.getTags() != null){
-            tagList.setItems(FXCollections.observableList(bookToEdit.getTags()));
+            tagList.setItems(FXCollections.observableList(new ArrayList<>(bookToEdit.getTags())));
         }
         subtitleField.setText(bookToEdit.getSubtitle());
         ISBNField.setText(bookToEdit.getIsbn());
@@ -428,7 +428,7 @@ public class AddEditController {
         coverField.setText(bookToEdit.getCoverType());
         languageField.setText(bookToEdit.getLanguage());
         if(bookToEdit.getTranslators() != null) {
-            translatorList.setItems(FXCollections.observableList(bookToEdit.getTranslators()));
+            translatorList.setItems(FXCollections.observableList(new ArrayList<>(bookToEdit.getTranslators())));
         }
 
     }
