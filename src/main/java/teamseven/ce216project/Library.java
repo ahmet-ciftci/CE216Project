@@ -271,7 +271,13 @@ public class Library {
             ArrayList<Book> importedBooks = gson.fromJson(jsonFormat, foundListType);                   //  Parses the string into books array
             books.addAll(importedBooks);
         } catch (JsonSyntaxException e) {
-            System.err.println("Json has syntax error exception");
+            try {
+                Book newBook = gson.fromJson(jsonFormat, Book.class);
+                books.add(newBook);
+            }
+            catch (Exception e1){
+                System.out.print("");
+            }
         } catch (IOException e) {
             System.err.println("Error occurred while opening .json file");
         } finally {
