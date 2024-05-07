@@ -286,16 +286,36 @@ public class MainController{
     }
 
     public void exportJsonPath() {
-        Stage stage = (Stage) exportButton.getScene().getWindow();
-        FileChooser file = new FileChooser();
-        file.setInitialFileName("library.json");
-        FileChooser.ExtensionFilter fileExtensions = new FileChooser.ExtensionFilter("JSON File","*.json");
-        file.getExtensionFilters().add(fileExtensions);
-        file.setTitle("Choose Export Location");
         try {
-            File f = file.showSaveDialog(stage);
-            library.exportJson(f.getPath());
-        } catch (NullPointerException e) {return;}
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("export-selector.fxml"));
+            DialogPane exportDialogPane = fxmlLoader.load();
+            ExportSelectorController controller = fxmlLoader.getController();
+            controller.initialize(library.getBooks());
+
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setTitle("Choose books to be exported");
+            dialog.setDialogPane(exportDialogPane);
+
+            Optional<ButtonType> buttonType = dialog.showAndWait();
+            if(buttonType.get() == ButtonType.APPLY){
+                if (controller.getSelectedBooks().isEmpty()) {
+                    return;
+                } else {
+                    Stage stage = (Stage) exportButton.getScene().getWindow();
+                    FileChooser file = new FileChooser();
+                    file.setInitialFileName("library.json");
+                    FileChooser.ExtensionFilter fileExtensions = new FileChooser.ExtensionFilter("JSON File","*.json");
+                    file.getExtensionFilters().add(fileExtensions);
+                    file.setTitle("Choose Export Location");
+                    try {
+                        File f = file.showSaveDialog(stage);
+                        library.exportSelectedBooks(f.getPath(),controller.getSelectedBooks());
+                    } catch (NullPointerException e) {return;}
+                }
+            }
+        } catch (IOException e) {
+            System.err.println(e);
+        }
     }
 
     public void importJsonPath() {

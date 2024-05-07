@@ -238,6 +238,23 @@ public class Library {
         }
     }
 
+    public void exportSelectedBooks(String path, ArrayList<Book> booksToExport) {       // Saves the .json to path that will be given from the FileChooser
+        Gson gson = new Gson();
+        String jsonFormat = gson.toJson(booksToExport);
+
+        Formatter formatter = null;
+        try {
+            formatter = new Formatter(path);
+            formatter.format("%s", jsonFormat);      // Overwrites the existing .json
+        } catch (FileNotFoundException e) {
+            System.err.println("File not found in path while exporting");
+        } finally {
+            if (formatter != null) {
+                formatter.close();
+            }
+        }
+    }
+
     public void importJson(String path) {
         Gson gson = new Gson();
         Scanner scanner = null;

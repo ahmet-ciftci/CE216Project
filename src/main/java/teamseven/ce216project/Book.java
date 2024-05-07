@@ -96,4 +96,9 @@ public class Book {
     public boolean getFound() {return Found;}
 
     public void setFound(boolean found) {Found = found;}
+
+    @Override
+    public String toString() {
+        return title;
+    }
 }
