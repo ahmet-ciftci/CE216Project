@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Optional;
 
 
@@ -151,6 +152,7 @@ public class MainController{
             DialogPane bookDialogPane = fxmlLoader.load();
             AddEditController controller = fxmlLoader.getController();
             controller.initialize();
+            controller.setImageView(new Image(Objects.requireNonNull(getClass().getResource("default.png")).openStream()));
 
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setTitle("Add a book");

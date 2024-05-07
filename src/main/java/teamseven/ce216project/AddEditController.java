@@ -432,4 +432,8 @@ public class AddEditController {
         }
 
     }
+
+    public void setImageView(Image fillerImage) {
+        imageView.setImage(fillerImage);
+    }
 }
