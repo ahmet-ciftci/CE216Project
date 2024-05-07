@@ -4,6 +4,7 @@ plugins {
     id 'org.javamodularity.moduleplugin' version '1.8.12'
     id 'org.openjfx.javafxplugin' version '0.0.13'
     id 'org.beryx.jlink' version '2.25.0'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 group 'teamseven'
@@ -26,7 +27,7 @@ tasks.withType(JavaCompile) {
 
 application {
     mainModule = 'teamseven.ce216project'
-    mainClass = 'teamseven.ce216project.App'
+    mainClass = 'teamseven.ce216project.ProxyMain'
 }
 
 javafx {
@@ -55,4 +56,10 @@ jlink {
 
 jlinkZip {
     group = 'distribution'
+}
+
+shadowJar {
+    manifest {
+        attributes('Main-Class': 'teamseven.ce216project.ProxyMain')
+    }
 }
